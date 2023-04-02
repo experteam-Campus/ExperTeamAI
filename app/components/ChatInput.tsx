@@ -127,7 +127,6 @@ await fetch('/api/chatGPT',{
         </div>
       </div>
         <form className='flex p-5 space-x-5   inset-x-0  bottom-0  focus:outline-none ' onSubmit={sendMsg}>
-
             <input 
             value={prompt}
             onChange={(e)=>setPrompt(e.target.value)}

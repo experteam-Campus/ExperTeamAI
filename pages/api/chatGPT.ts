@@ -21,12 +21,16 @@ export default async function handler(
     if(!chatId){res.status(400).json({answer:"please provied a valid chat ID :)"})
      return;}
 
-    const response = await query(prompt,chatId,modal,session);
+    const response = await query(prompt,modal);
 
-    console.log(response);
-
+    //console.log(response);
+    //console.log('response');
+    //console.log(typeof(chatId));
+    
+   
 const messagas:Messages={
-  text: response || `Oops I didnt' find a answer` ,
+  text: response ||   { role: 'assistant', content: `Oops I didnt' find an answer` },
+  prePrompts:'',
   timeStemp:admin.firestore.Timestamp.now(),
   user:{
   _id:"chatGPT",

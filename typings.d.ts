@@ -1,5 +1,6 @@
 interface Messages{
-    text:string;
+    text:any;
+    prePrompts:any;
     timeStemp:OfflineAudioCompletionEventInit.firestore.timeStemp;
     user:{
         _id:string;
@@ -8,7 +9,10 @@ interface Messages{
     }
 }
 
-
+interface WritePrompt{
+    prompt:any,
+    timeStemp:OfflineAudioCompletionEventInit.firestore.timeStemp,
+  }
 
 interface RequestTTS {
     input: {

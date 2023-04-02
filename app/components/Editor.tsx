@@ -1,73 +1,96 @@
 'use client'
-import React from 'react'
-import dynamic from 'next/dynamic';
+
+import { useState, useEffect,useCallback  } from "react";
+import { EditorState } from "prosemirror-state";
+import { EditorView } from "prosemirror-view";
+import { Schema, DOMParser } from "prosemirror-model";
+import { schema } from "prosemirror-schema-basic";
+import { addListNodes } from "prosemirror-schema-list";
+import { exampleSetup } from "prosemirror-example-setup";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { useSession } from "next-auth/react";
+import { collection, orderBy, query } from 'firebase/firestore'
+import { db } from "../../firebase";
+import { DocumentData } from 'firebase/firestore';
 
 
-
-import {  ImageExtension, ItalicExtension, CalloutExtension,DropCursorExtension } from 'remirror/extensions';
-//import { Remirror, useRemirror } from '@remirror/react';
-
-import { EditorComponent, Remirror, useRemirror,ThemeProvider, Toolbar } from '@remirror/react';
-//import { WysiwygEditor } from '@remirror/react-editors/wysiwyg';
+type Props={
+  fileID:string,   
+}
 
 
+export default function Editor({fileID}:Props) {
 
 
-
-export default function Editor() {
-
-    //const imageSrc = 'https://dummyimage.com/2000x800/479e0c/fafafa';
-   const RemirrorEditor = dynamic(() => import('@remirror/react').then((mod) => mod.Remirror), {
-      ssr: false,
+  const [view, setView] = useState<EditorView | null>(null);
+  const {data:session}=useSession();
+  useEffect(() => {
+    const mySchema = new Schema({
+      nodes: addListNodes(schema.spec.nodes, "paragraph block*", "block"),
+      marks: schema.spec.marks
     });
 
-    const remirrorJsonFromStorage = {
-        type: 'doc',
-        content: [
-          { type: 'heading', attrs: { level: 1 }, content: [{ type: 'text', text: 'Hello world' }] },
-          {
-            type: 'paragraph',
-            content: [
-              { type: 'text', text: 'Hello ' },
-              { type: 'text', marks: [{ type: 'italic' }], text: 'word' },
-            
-            ],
-          },
-        ],
-      };
+    const editorRoot = document.getElementById("editor-root");
+    if (!editorRoot) {
+      return;
+    }
+
+    const editorContainer = document.createElement("div");
+
+    // Add the editor container to the component's root element
+    editorRoot.appendChild(editorContainer);
+
+    const contentEl = document.getElementById("content");
+    if (!contentEl) {
+      return;
+    }
+
+    const newView = new EditorView(editorContainer, {
+      state: EditorState.create({
+        doc: DOMParser.fromSchema(mySchema).parse(contentEl),
+        plugins: exampleSetup({ schema: mySchema })
+      }) 
+    });
+
+    setView(newView);
+
+    // Cleanup function
+    return () => {
+      newView.destroy();
+      editorRoot.removeChild(editorContainer);
+    };
+  }, []);
 
 
-    const { manager, state} = useRemirror({
-        extensions: () => [
-         // new BoldExtension(),
-          new ItalicExtension(),
-          new CalloutExtension({ defaultType: 'warn' }),
-          //new DocExtension({ content: 'text*' }),
-          new ImageExtension({ enableResizing: true }),
-           new DropCursorExtension()
-        ],
-      
-        // Set the initial content.
-        content: '',
-      
-        // Place the cursor at the start of the document. This can also be set to
-        // `end`, `all` or a numbered position.
-        selection: 'start',
-      
-        // Set the string handler which means the content provided will be
-        // automatically handled as html.
-        // `markdown` is also available when the `MarkdownExtension`
-        // is added to the editor.
-        stringHandler: 'html',
-      });
-      
+  const updateEditorContent = useCallback((text: string) => {
+    if (!view) {
+      return;
+    }
+  
+    const { state, dispatch } = view;
+    const tr = state.tr.insertText(text);
+    dispatch(tr);
+  }, [view]);
+  
+
+
+  const [messagas] = useCollection(session&&query(collection(db,"users",session?.user?.email!,"WriteFile",fileID,"promptRes"),orderBy("timeStemp","asc")))
+  
+  {messagas?.docs.map((message)=>
+     //console.log(message.data())
+  {   if(message.data().prompt.role == "assistant"){
+     updateEditorContent(` \n\n ---------------- \n \n`+ message.data().prompt.content)
+    }}
+  //  msg.push(message.text.content)
+    )}
+
+  // Call this function to update the editor content
+
+
   return (
-    <div className='remirror-theme'>
-      <Remirror manager={manager} initialContent={state}>
-        {/* The text editor is placed above the menu to make the zIndex easier to manage for popups */}
-        <EditorComponent />
-        <Toolbar />
-      </Remirror>
+    <div className="border-gray-400 border-2 w-3/4 m-4"> 
+      <div style={{ whiteSpace: "pre-line" }} id="editor-root"/>
+      <div id="content" />
     </div>
-  )
+  );
 }

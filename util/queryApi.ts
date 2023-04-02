@@ -8,7 +8,7 @@ import { useState } from "react";
 
 
 
-const query =async (prompt:string,chatId:string,model:string,session:any) => {
+const query =async (prompt:any,model:string) => {
   //  const {prompt, chatId,modal,session}= req.body;
   //const [prePrompt, setprePrompt]=useState<any[]>([]);
 
@@ -24,28 +24,25 @@ const query =async (prompt:string,chatId:string,model:string,session:any) => {
  //console.log(doc.id, " => ", doc.data().text);
  //setprePrompt(prePrompt=>[...prePrompt, doc.data().text])
 
-//console.log(prompt)
-
-    const res = await openai.createCompletion({
+console.log(prompt)
+console.log(model)
+    const completion  = await openai.createChatCompletion({
         model,
-        prompt,
-        max_tokens:1000,
-        top_p:1,
-        temperature:0.7,
-        frequency_penalty:0,
-        presence_penalty:0,
-        stop:["/n"],
+        messages:prompt,
+        
     })
-    .then((res)=>{
-        console.log(res)
-        console.log(res.data.choices[0])
-       return res.data.choices[0].text
+    .then((completion)=>{
+        console.log("completion")
+        console.log(completion.data.choices[0].message)
+      //  console.log( completion.data.choices[0].message?.content.split('/n'))
+       return completion.data.choices[0].message
+       // return completion.data
+      // return completion.data.choices[0].message
             
-    }).catch((error)=>{`Somthing want worng, please try again - Error num: ${error.message}`})
-
+    }).catch((error)=>{`Somthing want worng, please try again - Error num: ${error.message}`});
 
 //setprePrompt([])
-    return res;
+   return completion;
 }
 
 export default query;

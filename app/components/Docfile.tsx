@@ -31,52 +31,46 @@ export default function Docfile({fileID}:Props) {
     
     /* questions for a stackholder*/
 
+    const setPromptOnChange =( e: React.FormEvent<HTMLFormElement>)=>{
+      
+      console.log(e)
+      if(promptFoucs!=''){
+        setPrompt(`[תתנהג כמו מפתח הדרכה], תנסח שאלות עבור תחקור לקוח. תתבסס על הפרמטרים הבאים: נושא הקורס: [${promptSubject }], מטרת הקורס: [${promptTarget}],], קהל היעד: [${promptAudience}],${optionalParameter}`)
+      }else{
+        setPrompt(`[Act as Instarctional Designer] Define stakeholder interview questions based on the parameters: Course Topic: [${promptSubject}], Purpose of the Lessons: [${promptTarget}],Target Audience:[${promptAudience}]`)
+      }
+       
+    
+      console.log(promptSubject);
+      console.log(promptTarget);
+      console.log(promptAudience);
+      console.log(promptFoucs);
+    }
+
   const sendPrompt = async(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
 
- if(selectedItem=='QuestionForStackHolder'){
-
-  if(promptFoucs!=''){
-    setPrompt(`[Act as Instarctional Designer] Define stakeholder interview questions based on the parameters: Course Topic: [${promptSubject}], Purpose of the Lessons: [${promptTarget}],Target Audience:[${promptAudience}],${optionalParameter}`)
-  }else{
-    setPrompt(`[Act as Instarctional Designer] Define stakeholder interview questions based on the parameters: Course Topic: [${promptSubject}], Purpose of the Lessons: [${promptTarget}],Target Audience:[${promptAudience}]`)
-  }
-   
-
-  console.log(promptSubject);
-  console.log(promptTarget);
-  console.log(promptAudience);
-  console.log(promptFoucs);
-}else if(selectedItem=='QuestionForLLearner'){
-  if(promptFoucs!=''){
-    setPrompt(`[Act as Instarctional Designer] Define questions for training product based on the parameters: Course Topic: [${promptSubject}], Purpose of the Lessons: [${promptTarget}],Target Audience:[${promptAudience}],${optionalParameter}`)
-  }else{
-    setPrompt(`[Act as Instarctional Designer] Define questions for training product based on the parameters: Course Topic: [${promptSubject}], Purpose of the Lessons: [${promptTarget}],Target Audience:[${promptAudience}]`)
-  }
-
-}else if(selectedItem=='SummarizeText'){
-  setPrompt(`Summeraize the following text: [${promptSummarize}]`)
 
 
-}else if(selectedItem=='Keywords'){
-  setPrompt(`Exctract keywords from the following text: [${promptKeywords}]`)
-}
-else if(selectedItem=='outline'){
-  setPrompt(`Define outline from the following text: [${promptOutline}]`)
-}
   
+      
+      if(prompt !=''){
+       // sendtoGPT();
+      }
+      
+      
+        }
+
+  const  sendtoGPT= async (e:React.FormEvent<HTMLFormElement>) => {
+
+    e.preventDefault();
+    console.log(promptSubject);
+    console.log(promptTarget);
+    console.log(promptAudience);
+    console.log(promptFoucs);
 
 
-if(prompt !=''){
-  sendtoGPT();
-}
-
-
-  }
-
-
-
-  const  sendtoGPT= async () => {
+    if(prompt !=''){
     const newMsg = {role:'user',content:prompt}
 newprompt.push(newMsg)
 
@@ -101,7 +95,7 @@ await fetch('/api/promptGPT',{
   setChatTyping(false)
  setNewPrompt([])
 })
-  }
+  }}
   return (
 
    <div>
@@ -116,7 +110,7 @@ await fetch('/api/promptGPT',{
     </select>
 
 {selectedItem == "QuestionForStackHolder" ? 
-   <form className='flex flex-col m-4 w-1/4' onSubmit={sendPrompt}> 
+   <form className='flex flex-col m-4 w-1/4' onSubmit={sendtoGPT} onChange={setPromptOnChange}> 
     <label htmlFor='subject'>נושא הקורס
     <input value={promptSubject} onChange={(e)=>setPromptSubject(e.target.value)} type="text" id='subject' placeholder='Please type the subject of the lesson' name='subject' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
     <label htmlFor='audience'>מטרת השיעור

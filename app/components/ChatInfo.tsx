@@ -20,7 +20,6 @@ const {data:session} = useSession();
 const [active, setActive] = useState(false);
 
 const [messages] = useCollection(query(
-
     collection(db, 'users', session?.user?.email!, 'chats',id, 'messages'),orderBy('timeStamp', 'asc')
 ))
 
@@ -43,7 +42,7 @@ const deleteChat =async () => {
     <Link href={`/chat/${id}`} className={`flex p-3   border border-b-neutral-400 hover:bg-slate-300 ${active && `bg-slate-300`}`}>
      <ChatBubbleOvalLeftEllipsisIcon className='w-6 h-6 mr-2'></ChatBubbleOvalLeftEllipsisIcon>
     <p className='flex-1 truncate'>
-        {messages?.docs[messages?.docs.length-1]?.data().text || 'New Chat'}
+        {/*messages?.docs[messages?.docs.length-1]?.data().text || 'New Chat'*/}
     </p>
     <TrashIcon onClick={deleteChat} className='w-6 h-6 mr-2  hover:text-red-700' ></TrashIcon>
     </Link>

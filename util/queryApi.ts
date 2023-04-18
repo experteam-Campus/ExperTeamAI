@@ -21,7 +21,7 @@ console.log(model)
     const completion  = await openai.createChatCompletion({
         model,
         messages:prompt,
-        
+        stream:true,
     })
     .then((completion)=>{
         console.log("completion")

@@ -21,7 +21,7 @@ type Props={
 
 export default function Editor({fileID}:Props) {
 
-
+console.log('EDITOR FUNC')
   const [view, setView] = useState<EditorView | null>(null);
   const {data:session}=useSession();
   useEffect(() => {
@@ -75,16 +75,19 @@ export default function Editor({fileID}:Props) {
 
 
   const [messagas] = useCollection(session&&query(collection(db,"users",session?.user?.email!,"WriteFile",fileID,"promptRes"),orderBy("timeStemp","asc")))
-  
+   // Call this function to update the editor content
   {messagas?.docs.map((message)=>
-     //console.log(message.data())
-  {   if(message.data().prompt.role == "assistant"){
+   
+  { 
+   
+    if(message.data().prompt.role == "assistant"){
+      console.log(message.data())
      updateEditorContent(` \n\n ---------------- \n \n`+ message.data().prompt.content)
     }}
   //  msg.push(message.text.content)
     )}
 
-  // Call this function to update the editor content
+ 
 
 
   return (

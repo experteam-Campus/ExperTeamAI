@@ -7,22 +7,14 @@ import { db } from "../firebase";
 import { useState } from "react";
 
 
+export const config = {
+  runtime: "edge",
+};
+
+
 
 const query =async (prompt:any,model:string) => {
-  //  const {prompt, chatId,modal,session}= req.body;
-  //const [prePrompt, setprePrompt]=useState<any[]>([]);
 
-//let newPrompt = "";
-{/*get prevease masseges for the prompt */}
-//const querySnapshot = await getDocs(collection(db,'users',session?.user?.email!, 'chats', chatId, 'messages'));
-//querySnapshot.forEach((doc) => {
- //doc.data() is never undefined for query doc snapshots
-
-//console.log(doc.data())
-
-
- //console.log(doc.id, " => ", doc.data().text);
- //setprePrompt(prePrompt=>[...prePrompt, doc.data().text])
 
 console.log(prompt)
 console.log(model)

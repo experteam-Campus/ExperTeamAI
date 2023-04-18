@@ -6,12 +6,15 @@ import Link from 'next/link';
 import {  useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import { db } from '../../firebase';
+import Editor from './Editor';
 
 type Props={
   fileID:string
 }
 
 export default function Docfile({fileID}:Props) {
+
+ 
   const router = useRouter();
   const {data:session} = useSession();
   const [chatTyping,setChatTyping] = useState(false)
@@ -31,35 +34,41 @@ export default function Docfile({fileID}:Props) {
     
     /* questions for a stackholder*/
 
-    const setPromptOnChange =( e: React.FormEvent<HTMLFormElement>)=>{
-      
+    const setPromptOnChangeQforStackholder =( e: React.FormEvent<HTMLFormElement>)=>{
+      console.log("Change");
+      console.log(promptSubject);
+      console.log(promptTarget);
+      console.log(promptAudience);
+      console.log(promptFoucs);
+
+
       console.log(e)
       if(promptFoucs!=''){
         setPrompt(`[תתנהג כמו מפתח הדרכה], תנסח שאלות עבור תחקור לקוח. תתבסס על הפרמטרים הבאים: נושא הקורס: [${promptSubject }], מטרת הקורס: [${promptTarget}],], קהל היעד: [${promptAudience}],${optionalParameter}`)
       }else{
         setPrompt(`[Act as Instarctional Designer] Define stakeholder interview questions based on the parameters: Course Topic: [${promptSubject}], Purpose of the Lessons: [${promptTarget}],Target Audience:[${promptAudience}]`)
       }
-       
-    
-      console.log(promptSubject);
-      console.log(promptTarget);
-      console.log(promptAudience);
-      console.log(promptFoucs);
     }
 
-  const sendPrompt = async(e:React.FormEvent<HTMLFormElement>)=>{
-    e.preventDefault();
+        /* questions for a learner*/
 
-
-
-  
-      
-      if(prompt !=''){
-       // sendtoGPT();
-      }
-      
-      
+        const setPromptOnChangeQforQuestionForLLearner =( e: React.FormEvent<HTMLFormElement>)=>{
+          console.log("Change");
+          console.log(promptSubject);
+          console.log(promptTarget);
+          console.log(promptAudience);
+          console.log(promptFoucs);
+    
+    
+          console.log(e)
+          if(promptFoucs!=''){
+            setPrompt(`[תתנהג כמו מפתח הדרכה], תנסח שאלות עבור תחקור לקוח. תתבסס על הפרמטרים הבאים: נושא הקורס: [${promptSubject }], מטרת הקורס: [${promptTarget}],], קהל היעד: [${promptAudience}],${optionalParameter}`)
+          }else{
+            setPrompt(`[Act as Instarctional Designer] Define stakeholder interview questions based on the parameters: Course Topic: [${promptSubject}], Purpose of the Lessons: [${promptTarget}],Target Audience:[${promptAudience}]`)
+          }
         }
+
+
 
   const  sendtoGPT= async (e:React.FormEvent<HTMLFormElement>) => {
 
@@ -72,7 +81,7 @@ export default function Docfile({fileID}:Props) {
 
     if(prompt !=''){
     const newMsg = {role:'user',content:prompt}
-newprompt.push(newMsg)
+    newprompt.push(newMsg)
 
   const writePrompt:WritePrompt={
     prompt:newMsg,
@@ -110,7 +119,7 @@ await fetch('/api/promptGPT',{
     </select>
 
 {selectedItem == "QuestionForStackHolder" ? 
-   <form className='flex flex-col m-4 w-1/4' onSubmit={sendtoGPT} onChange={setPromptOnChange}> 
+   <form className='flex flex-col m-4 w-1/4' onSubmit={sendtoGPT} onChange={setPromptOnChangeQforStackholder}> 
     <label htmlFor='subject'>נושא הקורס
     <input value={promptSubject} onChange={(e)=>setPromptSubject(e.target.value)} type="text" id='subject' placeholder='Please type the subject of the lesson' name='subject' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
     <label htmlFor='audience'>מטרת השיעור
@@ -123,7 +132,7 @@ await fetch('/api/promptGPT',{
    </form>
 :
 selectedItem == "QuestionForLLearner"? 
-<form className='flex flex-col m-4 w-1/4' onSubmit={sendPrompt}> 
+<form className='flex flex-col m-4 w-1/4' onSubmit={sendtoGPT} onChange={setPromptOnChangeQforQuestionForLLearner}> 
     <label htmlFor='subject'>נושא הקורס
     <input value={promptSubject} onChange={(e)=>setPromptSubject(e.target.value)} type="text" id='subject' placeholder='Please type the subject of the lesson' name='subject' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
     <label htmlFor='audience'>מטרת השיעור
@@ -137,7 +146,7 @@ selectedItem == "QuestionForLLearner"?
 selectedItem == "option"? 
 null:
 selectedItem == "SummarizeText"? 
-<form onSubmit={sendPrompt}> 
+<form onSubmit={sendtoGPT}> 
   <label htmlFor='focus'>איזה טקסט לסכם?
     <input value={promptSummarize} onChange={(e)=>setPromptSummarize(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
     <button disabled={!promptSummarize } className='flex items-center bg-[#E1539E] p-3 rounded-md text-white hover:bg-[#f25aab] transition-all ease-in'>סכם את הטקסט</button>
@@ -146,7 +155,7 @@ selectedItem == "SummarizeText"?
     </Link>
    </form>:
 selectedItem == "Keywords"? 
-<form onSubmit={sendPrompt}> 
+<form onSubmit={sendtoGPT}> 
   <label htmlFor='focus'>הכנס טקסט להוצאת מילות מפתח
     <input value={promptKeywords} onChange={(e)=>setPromptKeywords(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
     <button disabled={!promptKeywords } className='flex items-center bg-[#E1539E] p-3 rounded-md text-white hover:bg-[#f25aab] transition-all ease-in'> הוצא מילות מפתח </button>
@@ -154,7 +163,7 @@ selectedItem == "Keywords"?
 selectedItem == "VyondScript"? 
 <div>VyondScript</div>:
 selectedItem == "outline"? 
-<form onSubmit={sendPrompt}> 
+<form onSubmit={sendtoGPT}> 
   <label htmlFor='focus'>הכנס טקסט:
     <input value={promptOutline} onChange={(e)=>setPromptOutline(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
     <button disabled={!promptOutline } className='flex items-center bg-[#E1539E] p-3 rounded-md text-white hover:bg-[#f25aab] transition-all ease-in'> יצירת מתווה</button>
@@ -169,6 +178,8 @@ null
           </div>
         </div>
       </div>
+
+     {/* <Editor fileID={fileID}></Editor>*/}
 </div>
 
   )

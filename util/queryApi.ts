@@ -11,13 +11,13 @@ export const config = {
   runtime: "edge",
 };
 
-
+  
 
 const query =async (prompt:any,model:string) => {
 
 
-console.log(prompt)
-console.log(model)
+/*console.log(prompt)
+console.log(model)*/
     const completion  = await openai.createChatCompletion({
         model,
         messages:prompt,

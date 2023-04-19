@@ -27,6 +27,9 @@ const [messagas] = useCollection(session&&query(collection(db,"users",session?.u
 {messagas?.docs.map((massege)=>
 <Message key={massege.id} message={massege.data()}></Message>
 )}
+
+
+
 {/*blinker */}
        <ClientProvider></ClientProvider>
     </div>

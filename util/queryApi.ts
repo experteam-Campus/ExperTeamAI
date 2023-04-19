@@ -5,36 +5,57 @@ import openai from "./chatgpt";
 import { useSession } from "next-auth/react";
 import { db } from "../firebase";
 import { useState } from "react";
+import { OpenAIStream, OpenAIStreamPayload } from "../util/OpenAIStream";
 
 
 export const config = {
   runtime: "edge",
 };
 
-  
 
 const query =async (prompt:any,model:string) => {
 
 
-/*console.log(prompt)
-console.log(model)*/
+
+  const payload: OpenAIStreamPayload = {
+    model,
+    messages: prompt,
+    temperature: 0.7,
+    stream: true,
+  
+  };
+  
+  console.log(payload)
+  const stream = await OpenAIStream(payload);
+  console.log(stream)
+  return new Response(stream);
+
+
+/*
+console.log(prompt)
+console.log(model)
     const completion  = await openai.createChatCompletion({
         model,
+        stream: true,
         messages:prompt,
-        stream:true,
     })
+
+
+    
     .then((completion)=>{
-        console.log("completion")
+
+     // const json = JSON.parse(completion.data);
+    // completion.data.choices[0].message;
+
+        console.log(completion)
         console.log(completion.data.choices[0].message)
-      //  console.log( completion.data.choices[0].message?.content.split('/n'))
+
        return completion.data.choices[0].message
-       // return completion.data
-      // return completion.data.choices[0].message
+
             
     }).catch((error)=>{`Somthing want worng, please try again - Error num: ${error.message}`});
 
-//setprePrompt([])
-   return completion;
+   return completion;*/
 }
 
 export default query;

@@ -19,6 +19,8 @@ type Props={
 export default  function ChatInput({chatId}:Props) {
     const [prompt, setPrompt] = useState('');
     const [newprompt, setNewPrompt] = useState<any[]>([]);
+    const [AIprompt, setAIprompt] =  useState<String>('');
+    
   //  const [prePrompt, setprePrompt]=useState<any[]>([]);
     const {data:session}= useSession();
 
@@ -26,23 +28,25 @@ export default  function ChatInput({chatId}:Props) {
      const [chatTyping,setChatTyping] = useState(false)
 
 
-    const sendMsg = async(e: React.FormEvent<HTMLFormElement>)=>{
+    const sendMsg = async(e: React.FormEvent<HTMLFormElement>)=>
+    {
       
       e.preventDefault();
-
       if(!prompt) return;
 
       const newMsg = {role:'user',content:prompt}
-      newprompt.push(newMsg)
-      //console.log('newprompt')
-     // console.log(newprompt)
-      //setNewPrompt(...newMsg)
+      newprompt.push(newMsg);
+
+      //console.log('newprompt');
+     // console.log(newprompt);
+      //setNewPrompt(...newMsg);
+
       let input = prompt.trim();
       setPrompt("");
 
       let oldinput="";
 
-      //setprePrompt([])
+      //setprePrompt([]);
       const messagas:Messages={
         text:newMsg,
         prePrompts:newprompt,
@@ -59,17 +63,49 @@ await addDoc(collection(db,'users',session?.user?.email!, 'chats', chatId, 'mess
 
 
   {<ClientProvider></ClientProvider>}
-setChatTyping(true)
+  setChatTyping(true)
+
 const response = await fetch('/api/chatGPT',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
-        prompt:newprompt,chatId,modal:'gpt-3.5-turbo',session, oldinput
+        prompt:newprompt,chatId,model:'gpt-3.5-turbo',session, oldinput
     })
-}).then(()=>{
-  setChatTyping(false)
+})
+  console.log("response____")
+  console.log(response)
 
-})};
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  // This data is a ReadableStream
+
+  const data = response.body;
+  console.log(data)
+  if (!data) {
+    return;
+  }
+
+  const reader = data.getReader();
+  const decoder = new TextDecoder();
+  let done = false;
+
+  while (!done) {
+    const { value, done: doneReading } = await reader.read();
+    done = doneReading;
+    const chunkValue = decoder.decode(value);
+    console.log("chunkValue")
+    console.log(chunkValue)
+   
+    setAIprompt((prev) => prev + chunkValue);
+    console.log('AIprompt')
+    console.log(AIprompt)
+  }
+
+  setChatTyping(false)
+    }
+
 
   return (
     <div className=' '>

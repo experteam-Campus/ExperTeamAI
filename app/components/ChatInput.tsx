@@ -122,7 +122,6 @@ const response = await fetch('/api/chatGPT',{
      // await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(messagas);
      
   }
-  console.log(AIprompt)
   const Airesponse = await fetch('/api/AiresponseAPI',{
     method:'POST',
     headers:{'Content-Type':'application/json'},

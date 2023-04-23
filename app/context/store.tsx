@@ -28,12 +28,12 @@ interface contextProps{
 
 
 //const [AIprompt, setAIprompt]=useState('')
-  const AppContext = createContext<contextProps>({
+export  const AppContext = createContext<contextProps>({
   AIprompt:'',
   setAIprompt:():string=>'',
 });
 
-export const ContextProvider = ({children})=>{
+/*export const ContextProvider = ({children})=>{
   const [AIprompt, setAIprompt]=useState('')
 
   return(
@@ -41,7 +41,7 @@ export const ContextProvider = ({children})=>{
     {children}
     </AppContext.Provider>
   )
-}
+}*/
 
 export const useContextProvider =()=>useContext(AppContext)
 

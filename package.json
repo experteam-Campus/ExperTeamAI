@@ -11,6 +11,7 @@
     "@google-cloud/text-to-speech": "^4.2.1",
     "@googleapis/docs": "^2.0.1",
     "@heroicons/react": "^2.0.16",
+    "@reduxjs/toolkit": "^1.9.5",
     "@remirror/react": "^2.0.27",
     "@sveltejs/adapter-vercel": "^2.4.2",
     "eventsource": "^2.0.2",
@@ -36,6 +37,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-firebase-hooks": "^5.1.1",
+    "react-redux": "^8.0.5",
     "remirror": "^2.0.26"
   },
   "devDependencies": {

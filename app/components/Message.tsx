@@ -1,14 +1,16 @@
 import React from 'react'
 import { DocumentData } from 'firebase/firestore';
+import { useContextProvider } from '../context/store';
 
 type Props = {
-    message:DocumentData
+    message:DocumentData,
+   
 }
-export default function Message({message}:Props) {
+export default function Message({message}:Props,) {
 const isItAI = message.user.name==="ExperTeamAI"
 console.log('HERE')
+const {AIprompt, setAIprompt} = useContextProvider()
 console.log(message)
-
 //let msg=message.text.content.split("\n").join("<br/>")
 
 
@@ -20,11 +22,14 @@ console.log(message)
 
 
        {/*(message.text).map((txt:string)=>{
-        //<p> {txt}</p> 
+        <p> {txt}</p> 
  console.log(txt)
 })*/}
+{{isItAI}?
+<p style={{ whiteSpace: "pre-line" }}> {message.text.content}</p> :<p style={{ whiteSpace: "pre-line" }}> {message.text.content}</p> 
+}
 
-<p style={{ whiteSpace: "pre-line" }}> {message.text.content}</p> 
+
    
   </div> 
   

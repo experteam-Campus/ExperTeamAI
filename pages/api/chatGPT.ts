@@ -37,13 +37,13 @@ export default async function handler(
     messages: prompt,
     temperature: 0.7,
     stream: true,
-  
   };
   
-  console.log(payload)
+  
+  console.log(payload);
   const stream = await OpenAIStream(payload);
-  console.log('stream')
-  console.log(stream)
+  console.log('stream');
+  console.log(stream);
 
   return new Response(stream);
 

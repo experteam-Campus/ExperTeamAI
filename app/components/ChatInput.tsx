@@ -4,11 +4,14 @@ import { async } from '@firebase/util'
 import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { addDoc, collection, serverTimestamp,doc, getDoc, QuerySnapshot, QueryDocumentSnapshot, getDocs, query, orderBy } from 'firebase/firestore'
 import { useSession } from 'next-auth/react'
-import React, { useState } from 'react'
+import React, { useState, useReducer, useContext,useEffect } from 'react'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { db } from '../../firebase'
 import ClientProvider from './ClientProvider'
-
+import {useContextProvider} from '../context/store'
+import admin from 'firebase-admin'
+import { adminDb } from '../../firebaseAdmin';
+//import { AppContext } from '../context/store'
 
 type Props={
     chatId:string
@@ -17,11 +20,17 @@ type Props={
 
 
 export default  function ChatInput({chatId}:Props) {
+ //const [state, dispatch]= useReducer(reducer,{Airesponse:''});
+const {AIprompt, setAIprompt} = useContextProvider()
+
+ console.log(AIprompt);
+
     const [prompt, setPrompt] = useState('');
     const [newprompt, setNewPrompt] = useState<any[]>([]);
-    const [AIprompt, setAIprompt] =  useState<String>('');
+    //******const [AIprompt, setAIprompt] =  useState<String>('');
     
-  //  const [prePrompt, setprePrompt]=useState<any[]>([]);
+
+    //const [prePrompt, setprePrompt]=useState<any[]>([]);
     const {data:session}= useSession();
 
 
@@ -30,7 +39,6 @@ export default  function ChatInput({chatId}:Props) {
 
     const sendMsg = async(e: React.FormEvent<HTMLFormElement>)=>
     {
-      
       e.preventDefault();
       if(!prompt) return;
 
@@ -71,18 +79,21 @@ const response = await fetch('/api/chatGPT',{
     body:JSON.stringify({
         prompt:newprompt,chatId,model:'gpt-3.5-turbo',session, oldinput
     })
-})
-  console.log("response____")
-  console.log(response)
+});
+
+
+  console.log("response____");
+  console.log(response);
+
 
   if (!response.ok) {
     throw new Error(response.statusText);
   }
 
   // This data is a ReadableStream
-
   const data = response.body;
-  console.log(data)
+  
+  console.log(data);
   if (!data) {
     return;
   }
@@ -92,19 +103,37 @@ const response = await fetch('/api/chatGPT',{
   let done = false;
 
   while (!done) {
+
     const { value, done: doneReading } = await reader.read();
     done = doneReading;
+
     const chunkValue = decoder.decode(value);
-    console.log("chunkValue")
-    console.log(chunkValue)
+    console.log("chunkValue");
+    console.log(chunkValue);
    
     setAIprompt((prev) => prev + chunkValue);
-    console.log('AIprompt')
-    console.log(AIprompt)
-  }
+    console.log('AIprompt');
+    console.log(AIprompt);
 
-  setChatTyping(false)
-    }
+    
+
+
+  
+     // await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(messagas);
+     
+  }
+  console.log(AIprompt)
+  const Airesponse = await fetch('/api/AiresponseAPI',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      AIprompt,session,chatId
+    })
+});
+  //await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(messagas);
+  setChatTyping(false);
+
+  }
 
 
   return (

@@ -29,7 +29,7 @@ interface contextProps{
 
 //const [AIprompt, setAIprompt]=useState('')
 export  const AppContext = createContext<contextProps>({
-  AIprompt:'',
+  AIprompt:'MAY MAY',
   setAIprompt:():string=>'',
 });
 

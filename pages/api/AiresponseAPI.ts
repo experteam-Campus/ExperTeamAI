@@ -24,8 +24,8 @@ export default async function handler(
     session?:string;
     chatId?:String;
   };*/
-
-  console.log(AIprompt)
+  console.log('AIprompt');
+  console.log(AIprompt);
 
   
 

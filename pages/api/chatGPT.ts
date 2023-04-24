@@ -40,6 +40,7 @@ export default async function handler(
   };
   
   
+  
   console.log(payload);
   const stream = await OpenAIStream(payload);
   console.log('stream');
@@ -54,7 +55,7 @@ export default async function handler(
     
   /* 
 const messagas:Messages={
-  text: response ||   { role: 'assistant', content: `Oops I didnt' find an answer` },
+  text: { role: 'assistant', content: `Oops I didnt' find an answer` } ||   { role: 'assistant', content: `Oops I didnt' find an answer` },
   prePrompts:'',
   timeStemp:admin.firestore.Timestamp.now(),
   user:{

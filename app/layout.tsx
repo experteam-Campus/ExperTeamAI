@@ -1,4 +1,4 @@
-'use client'
+
 import '../styles/globals.css'
 import './head'
 import { AppContext } from '../app/context/store';

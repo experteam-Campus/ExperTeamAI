@@ -29,7 +29,7 @@ const [messagas] = useCollection(session&&query(collection(db,"users",session?.u
   return (
     <div className='flex flex-col p-3  h-screen  bg-slate-100 overflow-y-auto'>
 {messagas?.docs.map((massege)=>
-<Message key={massege.id} message={massege.data()} ></Message>
+<Message key={massege.id} message={massege.data()}  chatId={chatId} ></Message>
 )}
 
 

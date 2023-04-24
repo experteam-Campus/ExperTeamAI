@@ -38,16 +38,7 @@ const {AIprompt, setAIprompt} = useContextProvider()
 
      const [chatTyping,setChatTyping] = useState(false)
 
-     if(AIprompt !=''){
-
-      const Airesponse =  fetch('/api/AiresponseAPI',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          AIprompt,session,chatId
-        })
-       });
-     }
+    
     const sendMsg = async(e: React.FormEvent<HTMLFormElement>)=>
     {
       e.preventDefault();
@@ -130,7 +121,16 @@ const response = await fetch('/api/chatGPT',{
      // await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(messagas);
      
   }
+  /*if(AIprompt !=''){
 
+    const Airesponse =  fetch('/api/AiresponseAPI',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        AIprompt,session,chatId
+      })
+     });
+   }*/
   //console.log(AIprompt)
  /* const Airesponse = await fetch('/api/AiresponseAPI',{
     method:'POST',

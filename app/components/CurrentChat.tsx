@@ -5,11 +5,11 @@ import { useSession } from 'next-auth/react'
 import React from 'react'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { db } from '../../firebase'
-import { useContextProvider } from '../context/store'
+
 import ClientProvider from './ClientProvider'
 import Message from './Message'
 import Spinner from './Spinner'
-
+import { useContextProvider } from '../context/store';
 
 type Props={
     chatId:string, 
@@ -20,7 +20,10 @@ type Props={
 
 export default function CurrentChat({chatId}:Props) {
 const {data:session}=useSession();
+/*const {AIprompt, setAIprompt} = useContextProvider()
 
+console.log('AIprompt- Current chat')
+console.log(AIprompt)*/
 
 
 

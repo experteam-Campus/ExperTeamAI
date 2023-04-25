@@ -23,14 +23,18 @@ type DataType={
 
 interface contextProps{
   AIprompt:string,
-  setAIprompt:Dispatch<SetStateAction<string>>
+  setAIprompt:Dispatch<SetStateAction<string>>,
+  doneChunck:boolean,
+  setdoneChunck:Dispatch<SetStateAction<boolean>>,
 }
 
 
 //const [AIprompt, setAIprompt]=useState('')
 export  const AppContext = createContext<contextProps>({
-  AIprompt:'MAY MAY',
+  AIprompt:'',
   setAIprompt:():string=>'',
+  doneChunck:false,
+  setdoneChunck:():boolean=>false,
 });
 
 /*export const ContextProvider = ({children})=>{

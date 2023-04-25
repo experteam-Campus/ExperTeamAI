@@ -15,11 +15,15 @@ export default function RootLayout({
 }) {
 
   const [AIprompt, setAIprompt]=useState('')
+
+  const [doneChunck, setdoneChunck]=useState(false)
+
+
   return (
-    <html lang="he" dir='rtl'>
+    <html lang="he">
       <head/>
       <body>
-     <AppContext.Provider value={{AIprompt, setAIprompt}}>
+     <AppContext.Provider value={{AIprompt, setAIprompt,doneChunck,setdoneChunck}}>
         {children}
     </AppContext.Provider>
         </body>

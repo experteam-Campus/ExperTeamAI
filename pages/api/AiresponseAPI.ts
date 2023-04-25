@@ -16,7 +16,8 @@ export default async function handler(
     req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-    const {AIprompt,session,chatId}= req.body;
+    const {res:AIprompt,session,chatId}= req.body;
+    
    // const [generatedBios, setGeneratedBios] = useState<String>("");
 
   /* const { AIprompt,session,chatId } = (await req.json()) as {
@@ -24,14 +25,10 @@ export default async function handler(
     session?:string;
     chatId?:String;
   };*/
+
   console.log('AIprompt');
   console.log(session);
   console.log(AIprompt);
-
-  
-
-
-
 
     //console.log('response');
     //console.log(typeof(chatId));
@@ -47,7 +44,7 @@ const messagas:Messages={
   userImg:"/assets/LOGO_CIRCLE.png",
   }}
 
- // return messagas;
+ //return messagas;
 await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(messagas);
-  res.status(200).json({ answer: messagas.text })
+  res.status(200).json({ answer: messagas.text });
 }

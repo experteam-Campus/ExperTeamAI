@@ -32,7 +32,7 @@ export default async function handler(
   }
    console.log(model)
    console.log(prompt)
-   const payload: OpenAIStreamPayload = {
+     const payload: OpenAIStreamPayload = {
     model,
     messages: prompt,
     temperature: 0.7,
@@ -49,11 +49,14 @@ export default async function handler(
   return new Response(stream);
 
 
-
+/*
     //console.log('response');
     //console.log(typeof(chatId));
     
-  /* 
+ 
+    
+
+
 const messagas:Messages={
   text: { role: 'assistant', content: `Oops I didnt' find an answer` } ||   { role: 'assistant', content: `Oops I didnt' find an answer` },
   prePrompts:'',
@@ -62,9 +65,9 @@ const messagas:Messages={
   _id:"chatGPT",
   name:"ExperTeamAI",
   userImg:"/assets/LOGO_CIRCLE.png",
-  }}
+  }}*/
 
-  return messagas;
+//  return new Response messagas;
 //await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(messagas);
-  res.status(200).json({ answer: messagas.text })*/
+ // res.status(200).json({ answer: messagas.text })
 }

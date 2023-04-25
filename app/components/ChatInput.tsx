@@ -21,7 +21,7 @@ type Props={
 
 export default  function ChatInput({chatId}:Props) {
  //const [state, dispatch]= useReducer(reducer,{Airesponse:''});
-const {AIprompt, setAIprompt} = useContextProvider()
+const {AIprompt, setAIprompt,doneChunck,setdoneChunck} = useContextProvider()
 
  console.log(AIprompt);
 
@@ -69,7 +69,7 @@ const {AIprompt, setAIprompt} = useContextProvider()
       }
 
     
-await addDoc(collection(db,'users',session?.user?.email!, 'chats', chatId, 'messages'),messagas)
+  await addDoc(collection(db,'users',session?.user?.email!, 'chats', chatId, 'messages'),messagas)
 
 
   {<ClientProvider></ClientProvider>}
@@ -100,12 +100,13 @@ const response = await fetch('/api/chatGPT',{
     return;
   }
 
-  const reader = data.getReader();
-  const decoder = new TextDecoder();
-  let done = false;
+    const reader = data.getReader();
+    const decoder = new TextDecoder();
+    let done = false;
+ 
 
    while (!done) {
-
+   alert(done)
     const { value, done: doneReading } = await reader.read();
     done = doneReading;
 
@@ -117,30 +118,42 @@ const response = await fetch('/api/chatGPT',{
     console.log('AIprompt');
     console.log(AIprompt);
 
-    
      // await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(messagas);
-     
   }
-  /*if(AIprompt !=''){
 
-    const Airesponse =  fetch('/api/AiresponseAPI',{
+
+ if(done==true){
+console.log(AIprompt)
+    console.log('------------------------');
+    alert('DONE!! ' + AIprompt);
+
+    await fetch('/api/AiresponseAPI',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         AIprompt,session,chatId
       })
-     });
-   }*/
-  //console.log(AIprompt)
- /* const Airesponse = await fetch('/api/AiresponseAPI',{
+     }).then(() => {
+     // setAIprompt(''); 
+    });;
+   }
+
+
+  //console.log(AIprompt);
+
+ /*const Airesponse = await fetch('/api/AiresponseAPI',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
       AIprompt,session,chatId
     })
    });*/
-  //await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(messagas);
+
+
+ //await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(messagas);
   setChatTyping(false);
+ /* //setAIprompt('')*/
+
 
   }
 

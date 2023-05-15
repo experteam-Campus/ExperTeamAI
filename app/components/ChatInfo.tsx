@@ -41,7 +41,7 @@ const deleteChat =async () => {
   return (
     <Link href={`/chat/${id}`} className={`flex p-3   border border-b-neutral-400 hover:bg-slate-300 ${active && `bg-slate-300`}`}>
      <ChatBubbleOvalLeftEllipsisIcon className='w-6 h-6 mr-2'></ChatBubbleOvalLeftEllipsisIcon>
-    <p className='flex-1 truncate'>
+    <p className='flex-1 truncate m-0'>
     New Chat
         {/*messages?.docs[messages?.docs.length-1]?.data().text || 'New Chat'*/}
     </p>

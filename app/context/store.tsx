@@ -17,12 +17,12 @@ import { values } from "remirror";
 
 
 type DataType={
-  AIprompt:string;
+  AImsg:any;
   children:any;
 }
 
 interface contextProps{
-  AIprompt:string,
+  AImsg:any,
   setAIprompt:Dispatch<SetStateAction<string>>,
   doneChunck:boolean,
   setdoneChunck:Dispatch<SetStateAction<boolean>>,
@@ -31,7 +31,7 @@ interface contextProps{
 
 //const [AIprompt, setAIprompt]=useState('')
 export  const AppContext = createContext<contextProps>({
-  AIprompt:'',
+  AImsg:[],
   setAIprompt:():string=>'',
   doneChunck:false,
   setdoneChunck:():boolean=>false,

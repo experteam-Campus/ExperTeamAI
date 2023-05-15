@@ -27,7 +27,7 @@ const createNewChat=async () => {
 }
 
   return (
-    <div className='p-3 w-[300px] bg-slate-200 flex flex-col h-screen'>
+    <div className='p-3 w-[300px] bg-slate-200 flex flex-col  h-[94vh]'>
 <button onClick={createNewChat} className='flex items-center bg-[#E1539E] p-3 rounded-md text-white hover:bg-[#f25aab] transition-all ease-in'>
   <PlusIcon className='w-7 h-7 mr-2'/>
   New Chat</button>

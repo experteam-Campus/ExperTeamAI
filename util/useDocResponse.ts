@@ -7,27 +7,25 @@ import { db } from "../firebase";
 
 
 type Props={
-    chatId:string,
+    fileID:string,
     session:any,
     newprompt:any,
     setPrompt:any,
     prompt:string,
-    AIprompt:any,
-    setAIprompt:any,
-    listOfPrompts:any,
+   
 }
 
 type Props2={
-  chatId:string,
+    fileID:string,
   session:any,
   res:any,
 }
 
-export const useChatResponse =(()=>{
-  let msgHistory:any=[{role:'system',content:'you are a Professional Instructional Designer with 30 years of experience, your name is Expy'}];
+export const useDocResponse =(()=>{
+  let msgHistory:any=[{role:'system',content:'you are a Content Writer with 30 years of experience, your name is Expy'}];
 
 
-    const  handleMessageSubmit=  (async({prompt,setPrompt,newprompt,session,chatId,AIprompt,setAIprompt}:Props)=>{
+    const  handleMessageSubmit = (async({prompt,setPrompt,newprompt,session,fileID}:Props)=>{
       
         if(!prompt) return;
      
@@ -49,19 +47,16 @@ export const useChatResponse =(()=>{
         let oldinput="";
     
         //setprePrompt([]);
-        const messagas:Messages={
-          text:newMsg,
-          prePrompts:newprompt,
-          timeStemp:serverTimestamp(),
-          user:{
-              _id:session?.user?.email!,
-              name:session?.user?.name!,
-              userImg: "/assets/Avatar.png"
+        const writePrompt:WritePrompt={
+            text:newMsg,
+            timeStemp:serverTimestamp(),
           }
-        }
+        
+        
+          await addDoc(collection(db,'users',session?.user?.email!, 'WriteFile', fileID, 'promptRes'),writePrompt)
     
       
-    await addDoc(collection(db,'users',session?.user?.email!, 'chats', chatId, 'messages'),messagas);
+
     
      setPrompt("");
 
@@ -107,27 +102,27 @@ export const useChatResponse =(()=>{
     
     });
 
-    const saveResToDB=(async({res,session,chatId}:Props2)=>{
-      console.log(res)
+    const saveResToDB=(async({res,session,fileID}:Props2)=>{
+      /*console.log(res)
       console.log(session)
       console.log(chatId)
       await fetch('/api/AiresponseAPI',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-          res,session,chatId
+          res,session,fileID
         })
-       })
+       })*/
     });
 
 
-    const saveTEMP=(async({res,session,chatId}:Props2)=>{
+    const saveTEMP=(async({res,session,fileID}:Props2)=>{
       console.log(session);
-     const response = await fetch('/api/useAddEmptyDB',{
+     const response = await fetch('/api/AddEmptyDBWriter',{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-            session,chatId
+            session,fileID
         })
       }).then((res)=>{
         console.log('--------------------saved-----------------------------')
@@ -138,7 +133,7 @@ export const useChatResponse =(()=>{
 
 
 
-  const getAiRes=(async({prompt,setPrompt,newprompt,session,chatId,AIprompt,setAIprompt,listOfPrompts}:Props)=>{
+  const getAiRes=(async({prompt,setPrompt,newprompt,session,fileID}:Props)=>{
     let msg:any =[];
 
    /* const responseToDB = await fetch('/api/useAddEmptyDB',{
@@ -174,7 +169,7 @@ async function createAresponseAndUpdateDB () {
  // clearTimeout(myTimeout); 
 let id ='';
 
-    const test = await getDocs(query(collection(db,"users",session?.user?.email!,"chats",chatId,"messages"), orderBy('timeStemp', "asc"))).then((snapshot)=>{
+    const test = await getDocs(query(collection(db,"users",session?.user?.email!,"WriteFile",fileID,"promptRes"), orderBy('timeStemp', "asc"))).then((snapshot)=>{
     
       snapshot.docs.forEach((doc)=>{
       msg.push({...doc.data(),id:doc.id});
@@ -196,7 +191,7 @@ console.log('****************************************msgHistory*****************
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-            prompt:msgHistory,chatId,model:'gpt-3.5-turbo',session
+            prompt:msgHistory,model:'gpt-3.5-turbo',session
         })
       });
       
@@ -237,11 +232,12 @@ console.log('****************************************msgHistory*****************
         console.log(msg);
        // console.log(id);
        console.log('---------------------------msg------------------------');
-       const  docRef=doc(db,"users",session?.user?.email!,"chats",chatId,"messages",msg[msg.length-1].id);
+       const  docRef=doc(db,"users",session?.user?.email!,"WriteFile",fileID,"promptRes",msg[msg.length-1].id);
   
        updateDoc(docRef,{
-         text:{content: text+=chunkValue,
-         role : "assistant"}
+         text:{ role : "assistant",
+         content: text+=chunkValue
+        }
        });
   
   
@@ -260,7 +256,7 @@ console.log('****************************************msgHistory*****************
       }
   
       if(done==true){
-        setAIprompt('');
+        //setAIprompt('');
         msgHistory.push({ role : "assistant",content: text})
 
        // console.log('AIprompt');

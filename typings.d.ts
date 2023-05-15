@@ -10,7 +10,7 @@ interface Messages{
 }
 
 interface WritePrompt{
-    prompt:any,
+    text:any,
     timeStemp:OfflineAudioCompletionEventInit.firestore.timeStemp,
   }
 

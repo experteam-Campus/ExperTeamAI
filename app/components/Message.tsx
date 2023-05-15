@@ -6,23 +6,27 @@ import { useSession } from 'next-auth/react'
 
 type Props = {
     message:DocumentData,
-    chatId:any, 
+   
     //sessionparameter:any,
 }
-export default function  Message({message,chatId}:Props,) {
+export default function  Message({message}:Props,) {
+  console.log(message)
 const isItAI = message.user.name==="ExperTeamAI";
 const {data:session}=useSession();
-//const {AIprompt, setAIprompt,doneChunck,setdoneChunck} = useContextProvider()
-//console.log('HERE')
-//console.log(chatId)
 
-//setAIprompt('')
+
+
+//const {AIprompt, setAIprompt,doneChunck,setdoneChunck} = useContextProvider();
+//console.log('HERE');
+//console.log(chatId);
+
+//setAIprompt('');
 
 
   return (
     
     <div className={`${isItAI&& "bg-slate-200"}`}>
-    <div className='flex space-x-5 p-3'>
+    <div className='flex space-x-5 p-3 '>
         <img  className='h-12 w-12' src={message.user.userImg}/>
 
 

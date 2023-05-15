@@ -1,12 +1,15 @@
 'use client'
 
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import {  useRouter } from 'next/navigation';
 import React, { useState } from 'react'
+import { useCollection } from 'react-firebase-hooks/firestore';
 import { db } from '../../firebase';
+import { useDocResponse } from '../../util/useDocResponse';
 import Editor from './Editor';
+import Message from './Message';
 
 type Props={
   fileID:string
@@ -16,8 +19,12 @@ export default function Docfile({fileID}:Props) {
 
  
   const router = useRouter();
+  const { handleMessageSubmit,saveResToDB,saveTEMP,getAiRes } = useDocResponse();
+
+
   const {data:session} = useSession();
-  const [chatTyping,setChatTyping] = useState(false)
+  const [chatTyping,setChatTyping] = useState(false);
+  const [He,setHE] = useState(true);
   const [prompt, setPrompt] = useState("");
   const [newprompt, setNewPrompt] = useState<any[]>([]);
     const [promptSubject, setPromptSubject] = useState("");
@@ -78,35 +85,33 @@ export default function Docfile({fileID}:Props) {
     console.log(promptAudience);
     console.log(promptFoucs);
 
+    setChatTyping(true);
 
-    if(prompt !=''){
-    const newMsg = {role:'user',content:prompt}
-    newprompt.push(newMsg)
+    handleMessageSubmit({prompt,setPrompt,newprompt,session,fileID}).then((listOfPrompts)=>{
+      console.log('list of prompts');
+      saveTEMP({res:'', session, fileID}).then(()=>{
+        getAiRes({prompt,setPrompt,newprompt,session,fileID}).then((res)=>{
+      
+          console.log(res);
+          setChatTyping(false);
+        
+        })
+      }).then(()=>{
+    
+      });
+      })
+    
 
-  const writePrompt:WritePrompt={
-    prompt:newMsg,
-    timeStemp:serverTimestamp(),
-  }
+};
+
+  
+const [messagas] = useCollection(session&&query(collection(db,"users",session?.user?.email!,"WriteFile",fileID,"promptRes"),orderBy("timeStemp","asc")))
+// Call this function to update the editor content
 
 
-  await addDoc(collection(db,'users',session?.user?.email!, 'WriteFile', fileID, 'promptRes'),writePrompt)
 
-
-  //console.log(prompt);
-  setChatTyping(true)
-await fetch('/api/promptGPT',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
-        prompt:newprompt,modal:'gpt-3.5-turbo',session,fileID
-    })
-}).then(()=>{
-  setChatTyping(false)
- setNewPrompt([])
-})
-  }}
   return (
-
+<div className='flex justify-center'>
    <div>
     <select name="ChoosenPrompt" id="ChoosenPrompt" onChange={(e)=>{setSelectedItem(e.target.value)}} defaultValue={selectedItem}>
     <option value="option">במה אפשר לעזור?</option>
@@ -116,6 +121,11 @@ await fetch('/api/promptGPT',{
     <option value="Keywords">הוצאת מילות מפתח מקסט</option>
     <option value="VyondScript">יצירת תסריט לויאונד</option>
     <option value="outline">יצירת מתווה </option>
+    </select>
+
+    <select name="ChoosenLang" id="ChoosenLang" onChange={(e)=>{setHE(!{He})}} defaultValue={"עברית"}>
+    <option value="option">עברית</option>
+    <option value="QuestionForStackHolder">אנגלית</option>
     </select>
 
 {selectedItem == "QuestionForStackHolder" ? 
@@ -179,7 +189,13 @@ null
         </div>
       </div>
 
-     {/* <Editor fileID={fileID}></Editor>*/}
+     
+</div>
+
+{/* <Editor fileID={fileID}></Editor>*/}
+{<Editor fileID={fileID} ></Editor>}
+
+
 </div>
 
   )

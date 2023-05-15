@@ -8,6 +8,11 @@ import { useChatResponse } from '../../util/useChatResponse'
 import { PaperAirplaneIcon } from '@heroicons/react/24/outline'
 import { useSession } from 'next-auth/react'
 import { useContextProvider } from '../context/store';
+import { collection, getDocs, orderBy } from 'firebase/firestore'
+import { db } from '../../firebase'
+import { adminDb } from '../../firebaseAdmin'
+import admin from 'firebase-admin'
+
 
 type Props={
     chatId:string
@@ -16,28 +21,47 @@ type Props={
 
 export default function ChatDialog({chatId}:Props) {
   const {data:session}= useSession();
-  const {AIprompt, setAIprompt} = useContextProvider()
-  const { handleMessageSubmit,saveResToDB } = useChatResponse()
+  const {AImsg, setAIprompt} = useContextProvider();
+  const { handleMessageSubmit,saveResToDB,saveTEMP,getAiRes } = useChatResponse();
 
 
-
-  const [chatTyping,setChatTyping] = useState(false)
+//console.log(session)
+  const [chatTyping,setChatTyping] = useState(false);
 
 
   const [prompt, setPrompt] = useState('');
   const [newprompt, setNewPrompt] = useState<any[]>([]);
 
 
-const sendMSG=((e: React.FormEvent<HTMLFormElement>)=>{
+const sendMSG=(async(e: React.FormEvent<HTMLFormElement>)=>{
   e.preventDefault();
-  handleMessageSubmit({prompt,setPrompt,newprompt,session,chatId,AIprompt,setAIprompt}).then((res)=>{
-    
-    console.log(res)
-    saveResToDB({res,session,chatId})
-  
-  })
+  console.log(session);
+  setChatTyping(true);
 
-})
+  handleMessageSubmit({prompt,setPrompt,newprompt,session,chatId,AIprompt:AImsg,setAIprompt,listOfPrompts:''}).then((listOfPrompts)=>{
+    console.log('list of prompts');
+    saveTEMP({res:'', session, chatId}).then(()=>{
+      getAiRes({prompt,setPrompt,newprompt,session,chatId,AIprompt:AImsg,setAIprompt,listOfPrompts}).then((res)=>{
+    
+        console.log(res);
+        setChatTyping(false);
+      
+      })
+    }).then(()=>{
+  
+    });
+    })
+  
+
+
+ 
+});
+
+
+
+
+
+
 
   return (
     <div className='flex flex-col p-3 flex-1 bg-slate-100'>
@@ -57,7 +81,7 @@ const sendMSG=((e: React.FormEvent<HTMLFormElement>)=>{
           </div>
         </div>
       </div>
-        <form className='flex p-5 space-x-5   inset-x-0  bottom-0  focus:outline-none ' onSubmit={sendMSG}>
+        <form className='flex p-5 space-x-5   inset-x-0  bottom-0  focus:outline-none relative' onSubmit={sendMSG}>
             <input 
             value={prompt}
             onChange={(e)=>setPrompt(e.target.value)}

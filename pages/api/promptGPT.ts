@@ -33,12 +33,12 @@ export default async function handler(
 
 
 const writePromptres:WritePrompt={
-  prompt: response ||  { role: 'assistant', content: `Oops I didnt' find an answer` } ,
+  text: response ||  { role: 'assistant', content: `Oops I didnt' find an answer` } ,
   timeStemp:admin.firestore.Timestamp.now(),
   }
 console.log(writePromptres)
 
 
 await adminDb.collection("users").doc(session?.user?.email).collection("WriteFile").doc(fileID).collection("promptRes").add(writePromptres);
-  res.status(200).json({ answer: writePromptres.prompt })
+  res.status(200).json({ answer: writePromptres.text })
 }

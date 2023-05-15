@@ -23,13 +23,15 @@ export default async function handler(
    // const [generatedBios, setGeneratedBios] = useState<String>("");
 
    const { prompt,model } = (await req.json()) as {
-    prompt?: string;
+    prompt?: any;
     model?: any;
   };
 
   if (!prompt) {
     return new Response("No prompt in the request", { status: 400 });
   }
+
+
    console.log(model)
    console.log(prompt)
      const payload: OpenAIStreamPayload = {
@@ -53,10 +55,6 @@ export default async function handler(
     //console.log('response');
     //console.log(typeof(chatId));
     
- 
-    
-
-
 const messagas:Messages={
   text: { role: 'assistant', content: `Oops I didnt' find an answer` } ||   { role: 'assistant', content: `Oops I didnt' find an answer` },
   prePrompts:'',

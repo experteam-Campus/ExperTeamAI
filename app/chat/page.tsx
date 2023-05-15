@@ -10,7 +10,7 @@ export default async function chatHomePage() {
     const session = await getServerSession(authOptions);
 
   return (
-    <div className='  flex flex-row  '>
+    <div className='  flex flex-row   h-[94vh]'>
 
         <SessionProvider session={session}>
         <Chats></Chats>

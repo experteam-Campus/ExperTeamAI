@@ -80,9 +80,9 @@ console.log('EDITOR FUNC')
    
   { 
    
-    if(message.data().prompt.role == "assistant"){
+    if(message.data().text.role == "assistant"){
       console.log(message.data())
-     updateEditorContent(` \n\n ---------------- \n \n`+ message.data().prompt.content)
+     updateEditorContent(` \n\n ---------------- \n \n`+ message.data().text.content)
     }}
   //  msg.push(message.text.content)
     )}

@@ -19,7 +19,7 @@ export default async function ChatPage({params:{chatId}}:Props) {
     
     const session = await getServerSession(authOptions);
   return (
-    <div className='flex h-screen'>
+    <div className='flex h-[94vh]'>
      
         <SessionProvider session={session}>
         

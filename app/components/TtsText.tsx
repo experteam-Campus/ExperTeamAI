@@ -4,71 +4,142 @@ import React, { useState, useEffect } from 'react'
 import { addDoc, collection, orderBy, query, serverTimestamp, getDocs} from 'firebase/firestore';
 import {useCollection} from 'react-firebase-hooks/firestore'
 import { db } from '../../firebase';
+import { TextToSpeechClient } from '@google-cloud/text-to-speech';
+import { async } from '@firebase/util';
 
-export default function TtsText() {
+
+interface MyData {
+  prevArray: number;
+  newVal: string;
+}
+
+export default function  TtsText () {
    // let audio = new Audio('output.mp3');
 
-    const [speech, setSpeech] = useState('output.mp3');
+    const [speechLink, setspeechLink] = useState("");
+    const [langArray, setlangArray] = useState<any>([]);
+    const [selectedLang, setSelectedLang] = useState('0');
+    const [selectedLangCode, setSelectedlangCode] = useState('');
+    const [ssmlGender, setSsmlGender] = useState('FEMALE');
+    const [codeLangArr, setCodeLangArr] = useState<any>([]);
+    const [countrycodeArr, setCountrycodeArr] = useState('');
     const [text, setText] = useState('');
-  
      const {data:session}= useSession();
-    /* const [tts_files, loading, error]= useCollection(
-        session && query(collection(db,'users', session.user?.email!, 'tts_files'),orderBy('timeStamp', 'desc'))
-        );
-        const [chats, loading, error]= useCollection(
-            session && query(collection(db,'users', session.user?.email!, 'chats'),orderBy('timeStamp', 'desc'))
-            );*/
 
+     
+//let langArray:any = [];
+  useEffect(() => {
+    const listOfOptions=async()=>{
+      await fetch('/api/getlistOfOptions',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+           
+        })
+      }).then((res)=>{
+        console.log(res);
+       //console.log(res.json());
+      res.json().then((data)=>{
+      let newVal:any = data.voiceName.lang.lang;
+        setlangArray([ ...newVal]);
+        langArray.push(data.voiceName);
+        //data.voiceName.optionslist;
+        //data.voiceName.Optionslist;
+        setCodeLangArr([...data.voiceName.Optionslist]);
+        console.log(data.voiceName);
+     })}
+      )}
 
+      listOfOptions();
+    
+  }, [])
+  
 
-
+    
+let count=0;
      const sendText = async(e: React.FormEvent<HTMLFormElement>)=>{
       e.preventDefault();
- 
+
+    for(var i=0;i<=selectedLangCode.length;i++){
+let str = selectedLangCode;
+
+if(str[i] ==='-'){  
+  count++;
+   if(count ===2){ 
+  setCountrycodeArr(selectedLangCode.slice(0, i))
+}}
+console.log(count );
+
+    }
+      
+       setspeechLink("");
+
   await fetch('/api/tTS',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
         text,
       session,
-  
+      selectedLangCode,
+      ssmlGender,
+      countrycodeArr
     })
-
-  }).then(()=>{
-    setSpeech('output.mp3')
-  })
-
-
-
-
-
-  }
+  }).then((res)=>{
+    res.json().then((data)=>{
+      setspeechLink(data.url);
+    })
+  })}
 
 
   return (
-    <div>
-    <form onSubmit={sendText}>
+    <div className='flex flex-col'>
+     
+
+    <form onSubmit={sendText} className=''>
       
     <input
     value={text}
     onChange={(e)=>setText(e.target.value)}
-    className=' flex-1 rounded-md p-3 focus:outline-none text-gray-500' type="text" placeholder='Write the sentences'/>
+    className='flex-1 rounded-md p-3 focus:outline-none text-gray-500 h-[18em] w-96 border border-b-2 border-[#de53a6]' type="text" placeholder='Write the sentences'/>
+
+<label htmlFor="lang">Choose a Language:</label>
+
+<select id="lang" value={selectedLang} onChange={(e)=> setSelectedLang(e.target.value)}>
+  {langArray.map((lang:any,index:any) => (
+    <option key={lang} value={index}>{lang}</option>
+  ))}
+</select>
+
+<label htmlFor="langCode">Choose a Voice:</label>
+
+<select id="langCode" value={selectedLangCode} onChange={(e)=> setSelectedlangCode(e.target.value)}>
+  {codeLangArr[Number(selectedLang)]?.map((langCode:any,index:any) => (
+    <option key={langCode} value={langCode}>{langCode}</option>
+  ))}
+</select>
+
+{/*<select id="ssmlGender" value={ssmlGender} onChange={(e)=> setSsmlGender(e.target.value)}>
+  
+    <option  value='Female'>Female</option>
+    <option  value='Men'>Men</option>
+  </select>*/}
+
+
+
     <button>SPEECH</button>
    </form>
 
+
   {/*list of chats */}
 
-
-
-{speech && (
+{speechLink && (
     <audio controls>
-    <source src={speech} type="audio/mp3" />
+    <source src={speechLink} type="audio/mp3" />
     </audio>
-)}
+  )}
 
 </div>
   )
 }
 
 
-/**<audio controls><source src={tts_file.voice} type="audio/mp3" /></audio> */

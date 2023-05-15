@@ -24,11 +24,11 @@ export default async function page({params:{fileID}}:Props) {
 
 
   return (
-<div className='flex justify-center'>
+<div >
 <SessionProvider session={session}>
 
 <Docfile fileID={fileID}></Docfile>
- {<Editor fileID={fileID}></Editor>}
+ {/*<Editor fileID={fileID}></Editor>*/}
  </SessionProvider>
 </div>
   )

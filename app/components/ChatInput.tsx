@@ -48,7 +48,7 @@ const {AIprompt, setAIprompt,doneChunck,setdoneChunck} = useContextProvider()
       newprompt.push(newMsg);
 
       //console.log('newprompt');
-     // console.log(newprompt);
+      //console.log(newprompt);
       //setNewPrompt(...newMsg);
 
       let input = prompt.trim();

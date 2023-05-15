@@ -21,9 +21,9 @@ type Props={
 
 export default  function ChatInput({chatId}:Props) {
  //const [state, dispatch]= useReducer(reducer,{Airesponse:''});
-const {AIprompt, setAIprompt,doneChunck,setdoneChunck} = useContextProvider()
+const {setAIprompt,doneChunck,setdoneChunck} = useContextProvider()
 
- console.log(AIprompt);
+ //console.log(AIprompt);
 
 
 
@@ -115,23 +115,23 @@ const response = await fetch('/api/chatGPT',{
     console.log(chunkValue);
    
     setAIprompt((prev) => prev + chunkValue);
-    console.log('AIprompt');
-    console.log(AIprompt);
+    //console.log('AIprompt');
+   // console.log(AIprompt);
 
      // await adminDb.collection("users").doc(session?.user?.email).collection("chats").doc(chatId).collection("messages").add(messagas);
   }
 
 
  if(done==true){
-console.log(AIprompt)
+//console.log(AIprompt)
     console.log('------------------------');
-    alert('DONE!! ' + AIprompt);
+   // alert('DONE!! ' + AIprompt);
 
     await fetch('/api/AiresponseAPI',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
-        AIprompt,session,chatId
+        session,chatId
       })
      }).then(() => {
      // setAIprompt(''); 

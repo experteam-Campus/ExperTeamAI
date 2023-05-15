@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
 
-  const [AIprompt, setAIprompt]=useState('')
+  const [AImsg, setAIprompt]=useState('')
 
   const [doneChunck, setdoneChunck]=useState(false)
 
@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="he">
       <head/>
       <body>
-     <AppContext.Provider value={{AIprompt, setAIprompt,doneChunck,setdoneChunck}}>
+     <AppContext.Provider value={{ AImsg,setAIprompt,doneChunck,setdoneChunck}}>
         {children}
     </AppContext.Provider>
         </body>

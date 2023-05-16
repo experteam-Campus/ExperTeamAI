@@ -28,6 +28,10 @@ import { adminDb } from '../firebaseAdmin';
 import { useState } from 'react';
 
 
+export const config = {
+  runtime: "edge",
+};
+
 
 
 
@@ -169,14 +173,14 @@ let Optionslist= [listNameAF,listNameAR,listNameID,listNameMS,listNameCA,listNam
     voices.forEach((voice) => {
      // console.log( voice);
 
-     console.log('voice.name?.slice(0, 5)')
-console.log(voice.name?.slice(0, 5))
+     console.log('voice.name?.slice(0, 5)');
+     console.log(voice.name?.slice(0, 5));
 
       //  console.log(`  Supported language codes: ${languageCodes.join(', ')}`);
       if(voice.name?.slice(0, 5)=='af-ZA'){
        // listNameAF.push(lang.lang[0]);
         listNameAF.push(voice.name);
-        CountryCodesArray.push(voice.name?.slice(0, 5))
+        CountryCodesArray.push(voice.name?.slice(0, 5));
        // listNameAF.push(voice.name?.slice(0, 5));
         //console.log( `-------------------${languageCodes}---------------------`);
       }

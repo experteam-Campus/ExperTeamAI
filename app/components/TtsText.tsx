@@ -19,12 +19,12 @@ export default function  TtsText () {
     const [speechLink, setspeechLink] = useState("");
     const [langArray, setlangArray] = useState<any>([]);
     const [selectedLang, setSelectedLang] = useState('0');
-    const [selectedLangCode, setSelectedlangCode] = useState('');
+    const [selectedLangCode, setSelectedlangCode] = useState('af-ZA-Standard-A');
     const [ssmlGender, setSsmlGender] = useState('FEMALE');
     const [codeLangArr, setCodeLangArr] = useState<any>([]);
-    const [countrycodeArr, setCountrycodeArr] = useState('');
+    const [countrycodeArr, setCountrycodeArr] = useState('af-ZA');
     const [text, setText] = useState('');
-     const {data:session}= useSession();
+    const {data:session}= useSession();
 
      
 //let langArray:any = [];
@@ -51,28 +51,36 @@ export default function  TtsText () {
       )}
 
       listOfOptions();
-    
+
   }, [])
   
 
-    
-let count=0;
+     let count=0;
      const sendText = async(e: React.FormEvent<HTMLFormElement>)=>{
       e.preventDefault();
 
-    for(var i=0;i<=selectedLangCode.length;i++){
-let str = selectedLangCode;
-
-if(str[i] ==='-'){  
-  count++;
-   if(count ===2){ 
-  setCountrycodeArr(selectedLangCode.slice(0, i))
-}}
-console.log(count );
-
-    }
+   /*
       
-       setspeechLink("");
+      for(var i=0;i<=selectedLangCode.length;i++){
+       let str = selectedLangCode;
+
+     if(str[i] ==='-'){
+       count++;
+     if(count === 2){
+       setCountrycodeArr(str.slice(0, i));
+     }};
+
+   //  alert(countrycodeArr);
+    }
+       */   
+       
+   
+      
+    
+   
+
+      
+    setspeechLink("");
 
   await fetch('/api/tTS',{
     method:'POST',
@@ -93,10 +101,8 @@ console.log(count );
 
   return (
     <div className='flex flex-col'>
-     
-
     <form onSubmit={sendText} className=''>
-      
+
     <input
     value={text}
     onChange={(e)=>setText(e.target.value)}
@@ -119,12 +125,9 @@ console.log(count );
 </select>
 
 {/*<select id="ssmlGender" value={ssmlGender} onChange={(e)=> setSsmlGender(e.target.value)}>
-  
     <option  value='Female'>Female</option>
     <option  value='Men'>Men</option>
   </select>*/}
-
-
 
     <button>SPEECH</button>
    </form>

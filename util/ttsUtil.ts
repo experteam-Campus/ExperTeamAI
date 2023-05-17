@@ -56,11 +56,24 @@ export async function generateSpeech(text: string, session: any,selectedLangCode
   } else {
     console.log('No voices found.');
   }*/
+let count = 0;
+
+console.log(selectedLangCode);
+console.log(ssmlGender);
 
 
-console.log(selectedLangCode)
-console.log(ssmlGender)
-console.log(countrycodeArr)
+
+for(var i=0;i<=selectedLangCode.length;i++){
+  let str = selectedLangCode;
+
+if(str[i] ==='-'){
+  count++;
+if(count === 2){
+  countrycodeArr = str.slice(0, i);
+}};
+//  alert(countrycodeArr);
+}
+console.log(countrycodeArr);
 
 if(ssmlGender=='Men'){
   ssmlGender=='MALE'
@@ -68,14 +81,16 @@ if(ssmlGender=='Men'){
 if(ssmlGender=='Female'){
   ssmlGender=='FEMALE'
 }
+
+
   const [response] = await client.synthesizeSpeech({
-    input: {ssml: text },
+    input: {ssml: `<speak>${text} </speak>`},
     voice: { languageCode: countrycodeArr, name:selectedLangCode/*, ssmlGender:'FEMALE'*/ },
     audioConfig: { audioEncoding: 'MP3', pitch: 0, speakingRate: 1 },
   });
 
   
-  const outputFile = 'public/output.mp3';
+  const outputFile = 'output.mp3';
   const fileContent = response.audioContent;
   const writeFile = util.promisify(fs.writeFile);
 

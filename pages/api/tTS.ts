@@ -15,7 +15,7 @@ export default async function handler(
     const {text, session,selectedLangCode,ssmlGender,countrycodeArr}= req.body;
 
 console.log(session)
-  if(!text){res.status(400).json(console.log("please type some words :)"))
+  if(!text){res.status(400).json(console.log("please type some words :)"));
   return;}
 
 
@@ -30,5 +30,4 @@ console.log(session)
 
   return response;
 
- 
 }

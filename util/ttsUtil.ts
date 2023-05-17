@@ -92,7 +92,7 @@ if(ssmlGender=='Female'){
   
   const outputFile = 'output.mp3';
   const fileContent = response.audioContent;
-  const writeFile = util.promisify(fs.writeFile);
+  ///const writeFile = util.promisify(fs.writeFile);
 
 
 if (fileContent) {

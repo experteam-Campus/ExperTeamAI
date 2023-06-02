@@ -24,7 +24,7 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { adminDb } from '../firebaseAdmin';
-
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -91,7 +91,7 @@ const [response] = await client.synthesizeSpeech({
 const fileContent = response.audioContent; // this could be a string or a Buffer/Uint8Array
 
 if (fileContent instanceof Uint8Array) { // checks if it's a Buffer/Uint8Array
-  const storageRef = ref(storage, `audioFiles/output.mp3`);
+  const storageRef = ref(storage, `audioFiles/output+${uuidv4()}+.mp3`);
 
   // Convert the Node.js Buffer to a Uint8Array
   const uint8Array = new Uint8Array(fileContent.buffer, fileContent.byteOffset, fileContent.byteLength);

@@ -83,34 +83,22 @@ if(ssmlGender=='Female'){
 }
 
 const [response] = await client.synthesizeSpeech({
-  input: {ssml: `<speak>${text} </speak>`},
-  voice: { languageCode: countrycodeArr, name:selectedLangCode/*, ssmlGender:'FEMALE'*/ },
+  input: { ssml: `<speak>${text} </speak>` },
+  voice: { languageCode: countrycodeArr, name: selectedLangCode },
   audioConfig: { audioEncoding: 'MP3', pitch: 0, speakingRate: 0.90 },
 });
 
+const fileContent = response.audioContent; // this could be a string or a Buffer/Uint8Array
 
-
-
-
-  
-  const outputFile = 'output.mp3';
-  const fileContent = response.audioContent;
-  ///const writeFile = util.promisify(fs.writeFile);
-
-
-if (fileContent) {
-  await util.promisify(fs.writeFile)(outputFile, fileContent, 'binary');
-  let fileContentUint8Array: Uint8Array;
-
-  if (typeof fileContent === 'string') {
-    const textEncoder = new TextEncoder();
-    fileContentUint8Array = textEncoder.encode(fileContent);
-  } else {
-    fileContentUint8Array = fileContent;
-  }
-
+if (fileContent instanceof Uint8Array) { // checks if it's a Buffer/Uint8Array
   const storageRef = ref(storage, `audioFiles/output.mp3`);
-  await uploadBytes(storageRef, fileContentUint8Array);
+
+  // Convert the Node.js Buffer to a Uint8Array
+  const uint8Array = new Uint8Array(fileContent.buffer, fileContent.byteOffset, fileContent.byteLength);
+
+  // Upload the Uint8Array data directly to Firebase Storage
+  await uploadBytes(storageRef, uint8Array);
+
   const downloadURL = await getDownloadURL(storageRef);
 
   // Save the download URL to your database using Firebase Firestore
@@ -122,9 +110,9 @@ if (fileContent) {
 
   console.log('File available at', downloadURL);
   return downloadURL;
-
 } else {
-  console.log('Error: response audioContent is undefined or null');
+  console.log('Error: response.audioContent is not a Buffer/Uint8Array');
 }
+
 
 }

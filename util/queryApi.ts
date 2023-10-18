@@ -13,7 +13,7 @@ export const config = {
 };
 
 
-const query =async (prompt:any,model:string) => {
+const query =async (prompt:any,model:any) => {
 
 
 

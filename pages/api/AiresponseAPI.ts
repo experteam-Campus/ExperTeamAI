@@ -41,7 +41,7 @@ const messagas:Messages={
   user:{
   _id:"chatGPT",
   name:"ExperTeamAI",
-  userImg:"/assets/LOGO_CIRCLE.png",
+  userImg:"/assets/chatRobotImage.png",
   }}
 
  //return messagas;

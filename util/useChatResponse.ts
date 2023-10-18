@@ -56,7 +56,7 @@ export const useChatResponse =(()=>{
           user:{
               _id:session?.user?.email!,
               name:session?.user?.name!,
-              userImg: "/assets/Avatar.png"
+              userImg: session?.user?.image
           }
         }
     
@@ -196,7 +196,7 @@ console.log('****************************************msgHistory*****************
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-            prompt:msgHistory,chatId,model:'gpt-3.5-turbo',session
+            prompt:msgHistory,chatId,model:'gpt-4',session
         })
       });
       

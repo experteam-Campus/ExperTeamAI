@@ -38,7 +38,6 @@ export const config = {
 export async function listOfOptions() {
   //console.log(session);
 
-   
   const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS as string);
 
   const client = new TextToSpeechClient({
@@ -47,6 +46,23 @@ export async function listOfOptions() {
 
   const [result] = await client.listVoices({});
   const voices = result.voices;
+
+  const voiceToPersonMapping:any = {
+    'af-ZA-Standard-A': { name: 'Alice', image: '/images/alice.jpg', voiceCode:'af-ZA-Standard-A' },
+    'id-ID-Standard-A': { name: 'Indah', image: '/images/indah.jpg', voiceCode:'id-ID-Standard-A' },
+    'ar-XA-Wavenet-A':{ name: 'Indah', image: '/images/indah.jpg', voiceCode:'ar-XA-Wavenet-A' },
+    'ar-XA-Wavenet-B':{ name: 'Indah', image: '/images/indah.jpg', voiceCode:'ar-XA-Wavenet-B' },
+    'ar-XA-Wavenet-C':{ name: 'Indah', image: '/images/indah.jpg', voiceCode:'ar-XA-Wavenet-C' },
+    'ar-XA-Wavenet-D':{ name: 'Indah', image: '/images/indah.jpg' , voiceCode:'ar-XA-Wavenet-D'},
+    'ar-XA-Standard-A':{ name: 'Indah', image: '/images/indah.jpg' , voiceCode:'ar-XA-Standard-A'},
+    'ar-XA-Standard-B':{ name: 'Indah', image: '/images/indah.jpg', voiceCode:'ar-XA-Standard-B'},
+    'ar-XA-Standard-C':{ name: 'Indah', image: '/images/indah.jpg' , voiceCode:'ar-XA-Standard-C'},
+    'ar-XA-Standard-D':{ name: 'Indah', image: '/images/indah.jpg' , voiceCode:'ar-XA-Standard-D'},
+   //'ar-XA-Standard-D':{ name: 'Indah', image: '/images/indah.jpg' },
+
+    // ... add more mappings
+  };
+
 
   const lang = {lang:[
     'Afrikaans (Suid-Afrika)',
@@ -171,19 +187,26 @@ let Optionslist= [listNameAF,listNameAR,listNameID,listNameMS,listNameCA,listNam
   if (voices) {
     console.log('Voices:');
     voices.forEach((voice) => {
-     // console.log( voice);
+    console.log( "voice");
+    console.log( voice);
 
      console.log('voice.name?.slice(0, 5)');
      console.log(voice.name?.slice(0, 5));
-
       //  console.log(`  Supported language codes: ${languageCodes.join(', ')}`);
       if(voice.name?.slice(0, 5)=='af-ZA'){
+       // const personInfo = voiceToPersonMapping[voice.name];
+        //if (personInfo) {
+     //     listNameAF.push(personInfo.name);  // Use the mapped person name
+       // ... you can also use personInfo.image wherever you need the image ...
+     // }
+
        // listNameAF.push(lang.lang[0]);
         listNameAF.push(voice.name);
         CountryCodesArray.push(voice.name?.slice(0, 5));
        // listNameAF.push(voice.name?.slice(0, 5));
         //console.log( `-------------------${languageCodes}---------------------`);
       }
+      
       if(voice.name?.slice(0, 5)=='ar-XA'){
        // listNameAR.push(lang.lang[1]);
         listNameAR.push(voice.name);
@@ -475,12 +498,11 @@ let Optionslist= [listNameAF,listNameAR,listNameID,listNameMS,listNameCA,listNam
       const languageCodes = voice.languageCodes;
       if (languageCodes) {
         languageCodesArray.push(languageCodes)
-       
       }});
 
       let CountryCodesArrayUniq = [...new Set(CountryCodesArray)];
 
-        return {Optionslist, listGender, lang, languageCodesArray,CountryCodesArrayUniq,CountryCodesArray};
+        return {Optionslist, listGender, lang, languageCodesArray,CountryCodesArrayUniq,CountryCodesArray, voiceToPersonMapping};
 
   } else {
     console.log('No voices found.');

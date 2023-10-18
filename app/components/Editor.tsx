@@ -24,53 +24,7 @@ export default function Editor({fileID}:Props) {
 console.log('EDITOR FUNC')
   const [view, setView] = useState<EditorView | null>(null);
   const {data:session}=useSession();
-  useEffect(() => {
-    const mySchema = new Schema({
-      nodes: addListNodes(schema.spec.nodes, "paragraph block*", "block"),
-      marks: schema.spec.marks
-    });
-
-    const editorRoot = document.getElementById("editor-root");
-    if (!editorRoot) {
-      return;
-    }
-
-    const editorContainer = document.createElement("div");
-
-    // Add the editor container to the component's root element
-    editorRoot.appendChild(editorContainer);
-
-    const contentEl = document.getElementById("content");
-    if (!contentEl) {
-      return;
-    }
-
-    const newView = new EditorView(editorContainer, {
-      state: EditorState.create({
-        doc: DOMParser.fromSchema(mySchema).parse(contentEl),
-        plugins: exampleSetup({ schema: mySchema })
-      }) 
-    });
-
-    setView(newView);
-
-    // Cleanup function
-    return () => {
-      newView.destroy();
-      editorRoot.removeChild(editorContainer);
-    };
-  }, []);
-
-
-  const updateEditorContent = useCallback((text: string) => {
-    if (!view) {
-      return;
-    }
-  
-    const { state, dispatch } = view;
-    const tr = state.tr.insertText(text);
-    dispatch(tr);
-  }, [view]);
+ 
   
 
 
@@ -82,7 +36,7 @@ console.log('EDITOR FUNC')
    
     if(message.data().text.role == "assistant"){
       console.log(message.data())
-     updateEditorContent(` \n\n ---------------- \n \n`+ message.data().text.content)
+     //updateEditorContent(` \n\n ---------------- \n \n`+ message.data().text.content)
     }}
   //  msg.push(message.text.content)
     )}
@@ -93,7 +47,7 @@ console.log('EDITOR FUNC')
   return (
     <div className="border-gray-400 border-2 w-3/4 m-4"> 
       <div style={{ whiteSpace: "pre-line" }} id="editor-root"/>
-      <div id="content" />
+      
     </div>
   );
 }

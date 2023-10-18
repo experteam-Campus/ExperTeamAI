@@ -21,17 +21,10 @@ export default async function head() {
 
 
   return (
-    <div className='p-3 bg-slate-50  flex justify-between text-center'>
-    <h1>
+    <>
 
-    <Link href={session?'/':''}>
-    <Image src={LogoPic} alt="Experteam AI logo"/>
-</Link>
-
-
-   </h1>
-
-   {!session?(''):(<Logout></Logout>)}
-   </div>
+{!session?(''):(<Logout></Logout>)}
+ 
+   </>
   )
 }

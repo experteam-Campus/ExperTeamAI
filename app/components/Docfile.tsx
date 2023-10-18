@@ -50,7 +50,7 @@ export default function Docfile({fileID}:Props) {
 
 
       console.log(e)
-      if(promptFoucs!=''){
+      if(He==true){
         setPrompt(`[תתנהג כמו מפתח הדרכה], תנסח שאלות עבור תחקור לקוח. תתבסס על הפרמטרים הבאים: נושא הקורס: [${promptSubject }], מטרת הקורס: [${promptTarget}],], קהל היעד: [${promptAudience}],${optionalParameter}`)
       }else{
         setPrompt(`[Act as Instarctional Designer] Define stakeholder interview questions based on the parameters: Course Topic: [${promptSubject}], Purpose of the Lessons: [${promptTarget}],Target Audience:[${promptAudience}]`)
@@ -68,7 +68,7 @@ export default function Docfile({fileID}:Props) {
     
     
           console.log(e)
-          if(promptFoucs!=''){
+          if(He==true){
             setPrompt(`[תתנהג כמו מפתח הדרכה], תנסח שאלות עבור תחקור לקוח. תתבסס על הפרמטרים הבאים: נושא הקורס: [${promptSubject }], מטרת הקורס: [${promptTarget}],], קהל היעד: [${promptAudience}],${optionalParameter}`)
           }else{
             setPrompt(`[Act as Instarctional Designer] Define stakeholder interview questions based on the parameters: Course Topic: [${promptSubject}], Purpose of the Lessons: [${promptTarget}],Target Audience:[${promptAudience}]`)

@@ -12,7 +12,7 @@ import {
   }
   
   export interface OpenAIStreamPayload {
-    model: string;
+    model: "gpt-4";
     messages: any;
     stream: boolean;
     temperature: 0.7,

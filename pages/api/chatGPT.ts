@@ -32,9 +32,10 @@ export default async function handler(
   }
 
 
-   console.log(model)
-   console.log(prompt)
-     const payload: OpenAIStreamPayload = {
+   console.log(model);
+   console.log(prompt);
+
+    const payload: OpenAIStreamPayload = {
     model,
     messages: prompt,
     temperature: 0.7,

@@ -20,8 +20,7 @@ console.log(session)
 
 
   console.log(text);
-  const response = await generateSpeech(text,session,selectedLangCode,ssmlGender,countrycodeArr);
-
+  const response = await generateSpeech(text,session,selectedLangCode,ssmlGender,countrycodeArr );
 
   console.log('response');  
   console.log(response);
@@ -29,5 +28,4 @@ console.log(session)
   res.json({ message: 'Speech generated successfully!', url: response });
 
   return response;
-
 }

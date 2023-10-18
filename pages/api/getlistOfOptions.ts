@@ -14,10 +14,7 @@ export default async function handler(
 ) {
   
 
-
-
   const response = await listOfOptions();
-
 
   console.log('response');  
   console.log(response);

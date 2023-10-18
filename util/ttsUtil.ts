@@ -83,7 +83,11 @@ if(ssmlGender=='Female'){
 }
 
 const [response] = await client.synthesizeSpeech({
-  input: { ssml: `<speak>${text} </speak>` },
+  input: { 
+    ssml: 
+  `<speak>
+  ${text}
+  </speak>` },
   voice: { languageCode: countrycodeArr, name: selectedLangCode },
   audioConfig: { audioEncoding: 'MP3', pitch: 0, speakingRate: 0.90 },
 });
@@ -113,6 +117,4 @@ if (fileContent instanceof Uint8Array) { // checks if it's a Buffer/Uint8Array
 } else {
   console.log('Error: response.audioContent is not a Buffer/Uint8Array');
 }
-
-
 }

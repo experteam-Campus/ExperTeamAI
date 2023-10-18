@@ -79,7 +79,7 @@ const response = await fetch('/api/chatGPT',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
-        prompt:newprompt,chatId,model:'gpt-3.5-turbo',session, oldinput
+        prompt:newprompt,chatId,model:'gpt-4',session, oldinput
     })
 });
 

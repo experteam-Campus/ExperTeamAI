@@ -89,7 +89,7 @@ const [response] = await client.synthesizeSpeech({
   ${text}
   </speak>` },
   voice: { languageCode: countrycodeArr, name: selectedLangCode },
-  audioConfig: { audioEncoding: 'MP3', pitch: 0, speakingRate: 0.90 },
+  audioConfig: { audioEncoding: 'MP3', pitch: 0, speakingRate: 1.12 },
 });
 
 const fileContent = response.audioContent; // this could be a string or a Buffer/Uint8Array

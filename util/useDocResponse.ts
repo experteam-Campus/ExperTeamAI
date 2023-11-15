@@ -29,13 +29,9 @@ export const useDocResponse =(()=>{
       
         if(!prompt) return;
      
-
         const newMsg = {role:'user',content:prompt};
 
-        msgHistory.push(newMsg)
-
-
-
+        msgHistory.push(newMsg);
         newprompt.push(newMsg);
     
         console.log('newprompt');
@@ -43,7 +39,6 @@ export const useDocResponse =(()=>{
         //setNewPrompt(...newMsg);
     
         let input = prompt.trim();
-
         let oldinput="";
     
         //setprePrompt([]);
@@ -52,18 +47,14 @@ export const useDocResponse =(()=>{
             timeStemp:serverTimestamp(),
           }
         
-        
-          await addDoc(collection(db,'users',session?.user?.email!, 'WriteFile', fileID, 'promptRes'),writePrompt)
-    
-      
-
+        await addDoc(collection(db,'users',session?.user?.email!, 'WriteFile', fileID, 'promptRes'),writePrompt);
     
      setPrompt("");
 
     return newprompt;
-    //setChatTyping(true);
-    
 
+
+    //setChatTyping(true);
     /*------------------------------------------------------------------------------------
     if(done==true){
     console.log(AIprompt)
@@ -184,9 +175,9 @@ let id ='';
     }).catch((err)=>{console.log(err.message)});
 
 
-    console.log('****************************************msgHistory******************************')
-console.log(msgHistory)
-console.log('****************************************msgHistory******************************')
+    console.log('****************************************msgHistory******************************');
+    console.log(msgHistory);
+    console.log('****************************************msgHistory******************************');
       const response = await fetch('/api/chatGPT',{
         method:'POST',
         headers:{'Content-Type':'application/json'},

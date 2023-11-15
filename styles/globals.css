@@ -115,6 +115,60 @@ letter-spacing: -1.35px;
   background: "linear-gradient(180deg, #FFF 0%, rgba(255, 255, 255, 0.00) 62.54%);"
 }
 
+.btnTextEditor{
+  border-radius: 70px;
+  background: rgba(255, 255, 255, 0.80);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
+  display: flex;
+  width: fit-content;
+  height: 45px;
+  padding: 8px 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-left: 24px;
+}
+
+.btnTextEditor:hover{
+border-radius: 70px;
+background: #FF3067;
+box-shadow: 0px -2px 0px 0px #FFF inset;
+color: #FFF;
+}
+
+.form_container input{
+  width: 253px;
+  height: 45px;
+  border-radius: 69px;
+  background: rgba(255, 255, 255, 0.80);
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  border:none;
+}
+
+.form_container label{
+  display: flex;
+  flex-direction: column;
+}
+
+.draw {
+  margin-left: 22px;
+}
+
+
+.formBTN{
+  border-radius: 50px;
+  background: #FF3067;
+  box-shadow: 0px -1px 0px 0px #F0F0F0 inset;
+  width: fit-content;
+}
+
+.formBTN:hover{
+  border-radius: 50px;
+  background: #FFF;
+  box-shadow: 0px -1px 0px 0px #FF3067 inset;
+}
+
 
 .newChatBTN{
 border-radius: 5px;
@@ -198,6 +252,25 @@ color: #FFF;
 }
 
 
+.editor-container p {
+  height: 400px !important; /* or any height you prefer */
+  overflow-y: auto; /* enables vertical scrolling */
+  overflow-x:hidden;
+ /*  border: 1px solid #ccc; optional, just for visibility */
+}
+
+.ProseMirror-menubar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* This ensures the menu bar stretches across the full width of the viewport */
+  z-index: 100; /* Keeps the menu bar on top of other content */
+  /* Add other styling as needed */
+}
+.ProseMirror-menubar-spacer {
+  height: 50px; /* Adjust this to match the height of your fixed menu bar */
+}
+
 
 /***carousel start***/
 
@@ -207,9 +280,7 @@ color: #FFF;
 }
 
 .slick-dots {
-
   bottom: -38px;
-
 }
 
 .slide-context {
@@ -353,7 +424,11 @@ textarea::placeholder {
     outline: 2px solid #8cf;
   }
   
-
+  .ProseMirror-menubar{
+    background-color: #FF3067 !important;
+    color: white !important;
+  }
+  
   /* Make sure li selections wrap around markers */
   
   li.ProseMirror-selectednode {

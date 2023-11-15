@@ -47,7 +47,7 @@ setActiveChat(pathName.includes('/chat'))
  
     {clicked? (
 
-      <div className="rounded-xl  border border-solid border-white backdrop-blur-[28.5px] w-20 absolute z-50" style={{ 
+      <div className="rounded-xl  border border-solid border-white backdrop-blur-[28.5px] w-20 absolute z-50 h-[96%]" style={{ 
       background: 'rgba(255, 255, 255, 0.57)'
   }}>
     <div className='flex flex-col  p-4  h-full justify-around'>
@@ -78,7 +78,7 @@ setActiveChat(pathName.includes('/chat'))
    <Link href={'/chat'} className='flex justify-center '>
 
     <div>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className={`text-[#41394B] group-hover:text-[#FF3067] ${activeChat && `text-[#FF3067]`}`}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className={`text-[#41394B] group-hover:text-[#FF3067]  `}>
   <path d="M20 24H4C3.448 24 3 23.553 3 23C3 19.691 5.691 17 9 17H15C18.309 17 21 19.691 21 23C21 23.553 20.552 24 20 24ZM20.5 6H20C20 3.794 18.206 2 16 2H13V1C13 0.447 12.552 0 12 0C11.448 0 11 0.447 11 1V2H8C5.794 2 4 3.794 4 6H3.5C2.673 6 2 6.673 2 7.5V9.5C2 10.327 2.673 11 3.5 11H4C4 13.206 5.794 15 8 15H16C18.206 15 20 13.206 20 11H20.5C21.327 11 22 10.327 22 9.5V7.5C22 6.673 21.327 6 20.5 6ZM9.5 10C8.672 10 8 9.328 8 8.5C8 7.672 8.672 7 9.5 7C10.328 7 11 7.672 11 8.5C11 9.328 10.328 10 9.5 10ZM14.5 10C13.672 10 13 9.328 13 8.5C13 7.672 13.672 7 14.5 7C15.328 7 16 7.672 16 8.5C16 9.328 15.328 10 14.5 10Z" fill="currentColor"/>
 </svg>
     </div>
@@ -90,11 +90,10 @@ setActiveChat(pathName.includes('/chat'))
 
 
  {/******--2--****** */}
-
 <div className='flex flex-col items-center gap-3 mb-3 mt-3'>
  {/*כתיבה*/}
  <div className='rounded-xl group hover:bg-white p-2 w-10 h-10' >
- <Link href={'/create'} className='flex justify-center '>
+ <Link href={'/create'} className='flex justify-center'>
 
     <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='text-[#41394B] group-hover:text-[#FF3067]'>
@@ -120,7 +119,7 @@ setActiveChat(pathName.includes('/chat'))
 
 {/* GPT */}
 <div className='rounded-xl group hover:bg-white p-2 w-10 h-10'>
-<Link href={'https://openai.com/gpt-4'} className='flex justify-center'>
+<Link href={'https://openai.com/gpt-4'} target={'_blank'} className='flex justify-center'>
 
     <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='text-[#41394B] group-hover:text-[#FF3067]'>
@@ -139,7 +138,7 @@ setActiveChat(pathName.includes('/chat'))
     
 {/*chat pdf */}
 <div className='rounded-xl group hover:bg-white p-2 w-10 h-10'>
-<Link href={'https://www.chatpdf.com/'} className='flex justify-center'>
+<Link href={'https://www.chatpdf.com/'} target={'_blank'} className='flex justify-center'>
 
     <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='text-[#41394B] group-hover:text-[#FF3067]'>
@@ -186,7 +185,7 @@ setActiveChat(pathName.includes('/chat'))
 <div className='rounded-xl group hover:bg-white p-2 w-10 h-10'>
 <Link href={'https://www.imiprompt.com/'} className='flex justify-center'>
 
-    <div>
+ <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='text-[#41394B] group-hover:text-[#FF3067]'>
   <path d="M21 0H3C1.34531 0 0 1.36423 0 3.04219V17.2406C0 18.9186 1.34531 20.2828 3 20.2828H6.92344L10.6734 23.4819C11.0531 23.8289 11.5359 24 12.0094 24C12.4781 24 12.9422 23.8336 13.3031 23.5104L17.1516 20.2876H21C22.6547 20.2876 24 18.9234 24 17.2454V3.04219C24 1.36423 22.6547 0 21 0ZM10.2938 13.4807L8.87812 14.9162L5.57812 11.5698C5.20312 11.1895 4.99687 10.6857 4.99687 10.1438C4.99687 9.6019 5.20312 9.09804 5.57812 8.71777L8.87812 5.37136L10.2938 6.80689L6.99375 10.1533L10.2938 13.4807ZM18.4172 11.5698L15.1172 14.9162L13.7016 13.4807L17.0016 10.1343L13.7016 6.80689L15.1172 5.37136L18.4172 8.71777C18.7922 9.09804 18.9984 9.6019 18.9984 10.1438C18.9984 10.6809 18.7922 11.1895 18.4172 11.5698Z" fill="currentColor"/>
 </svg>
@@ -198,7 +197,6 @@ setActiveChat(pathName.includes('/chat'))
  {/*TTS*/}
  <div className='rounded-xl group hover:bg-white p-2 w-10 h-10'>
  <Link href={'/TTS'} className='flex justify-center'>
-
     <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 20 24" fill="none" className='text-[#41394B] group-hover:text-[#FF3067]'>
 <path d="M19.2 10.4999C19.2 15.1999 15.7 19.1999 11.2 19.9999V21.6999C11.2 22.5999 10.5 23.2999 9.6 23.2999C8.7 23.2999 8 22.5999 8 21.6999V19.9999C3.5 19.1999 0 15.2999 0 10.4999C0 9.5999 0.7 8.8999 1.6 8.8999C2.5 8.8999 3.2 9.5999 3.2 10.4999C3.2 13.9999 6.1 16.8999 9.6 16.8999C13.1 16.8999 16 13.9999 16 10.4999C16 9.5999 16.7 8.8999 17.6 8.8999C18.5 8.8999 19.2 9.5999 19.2 10.4999Z" fill="currentColor"/>
@@ -209,10 +207,10 @@ setActiveChat(pathName.includes('/chat'))
 </div>
 
 
+
  {/*כתוביות*/}
  <div className='rounded-xl group hover:bg-white p-2 w-10 h-10'>
  <Link href={'https://sonix.ai/'} target={'_blank'} className='flex justify-center'>
-   
     <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='text-[#41394B] group-hover:text-[#FF3067]'>
 <path d="M19 2H5C3.67441 2.00159 2.40356 2.52888 1.46622 3.46622C0.528882 4.40356 0.00158786 5.67441 0 7L0 17C0.00158786 18.3256 0.528882 19.5964 1.46622 20.5338C2.40356 21.4711 3.67441 21.9984 5 22H19C20.3256 21.9984 21.5964 21.4711 22.5338 20.5338C23.4711 19.5964 23.9984 18.3256 24 17V7C23.9984 5.67441 23.4711 4.40356 22.5338 3.46622C21.5964 2.52888 20.3256 2.00159 19 2ZM5 11H7C7.26522 11 7.51957 11.1054 7.70711 11.2929C7.89464 11.4804 8 11.7348 8 12C8 12.2652 7.89464 12.5196 7.70711 12.7071C7.51957 12.8946 7.26522 13 7 13H5C4.73478 13 4.48043 12.8946 4.29289 12.7071C4.10536 12.5196 4 12.2652 4 12C4 11.7348 4.10536 11.4804 4.29289 11.2929C4.48043 11.1054 4.73478 11 5 11ZM13 18H5C4.73478 18 4.48043 17.8946 4.29289 17.7071C4.10536 17.5196 4 17.2652 4 17C4 16.7348 4.10536 16.4804 4.29289 16.2929C4.48043 16.1054 4.73478 16 5 16H13C13.2652 16 13.5196 16.1054 13.7071 16.2929C13.8946 16.4804 14 16.7348 14 17C14 17.2652 13.8946 17.5196 13.7071 17.7071C13.5196 17.8946 13.2652 18 13 18ZM19 18H17C16.7348 18 16.4804 17.8946 16.2929 17.7071C16.1054 17.5196 16 17.2652 16 17C16 16.7348 16.1054 16.4804 16.2929 16.2929C16.4804 16.1054 16.7348 16 17 16H19C19.2652 16 19.5196 16.1054 19.7071 16.2929C19.8946 16.4804 20 16.7348 20 17C20 17.2652 19.8946 17.5196 19.7071 17.7071C19.5196 17.8946 19.2652 18 19 18ZM19 13H11C10.7348 13 10.4804 12.8946 10.2929 12.7071C10.1054 12.5196 10 12.2652 10 12C10 11.7348 10.1054 11.4804 10.2929 11.2929C10.4804 11.1054 10.7348 11 11 11H19C19.2652 11 19.5196 11.1054 19.7071 11.2929C19.8946 11.4804 20 11.7348 20 12C20 12.2652 19.8946 12.5196 19.7071 12.7071C19.5196 12.8946 19.2652 13 19 13Z" fill="currentColor"/>
@@ -227,8 +225,7 @@ setActiveChat(pathName.includes('/chat'))
  {/************ */}
 
 
- 
- <div className='m-auto ' onClick={()=>setClicked(!clicked)}>
+ <div className='m-auto cursor-pointer mt-3' onClick={()=>setClicked(!clicked)} >
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 24" fill="none" className=''>
   <path d="M13 3L3 12.4983L13 22" stroke="#41394B" stroke-width="3.47" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
@@ -319,7 +316,7 @@ setActiveChat(pathName.includes('/chat'))
 
 {/* GPT */}
 <div className='rounded-xl group hover:bg-white'>
-<Link href={'https://openai.com/gpt-4'} className='flex justify-between  pt-2 pl-4 pr-4'>
+<Link href={'https://openai.com/gpt-4'} target={'_blank'} className='flex justify-between  pt-2 pl-4 pr-4'>
     <button className=''>Chat GPT
   
     </button>
@@ -340,7 +337,7 @@ setActiveChat(pathName.includes('/chat'))
     
 {/*chat pdf */}
 <div className='rounded-xl group hover:bg-white'>
-<Link href={'https://www.chatpdf.com/'} className='flex justify-between pb-2 pt-2 pl-4 pr-4'>
+<Link href={'https://www.chatpdf.com'} target={'_blank'} className='flex justify-between pb-2 pt-2 pl-4 pr-4'>
     <button className=''>Chat Pdf
 
     </button>
@@ -386,7 +383,7 @@ setActiveChat(pathName.includes('/chat'))
 
 {/*פרומפט אסיסטנט */}
 <div className='rounded-xl group hover:bg-white'>
-<Link href={'https://www.imiprompt.com/'} className='flex justify-between pb-2 pt-2 pl-4 pr-4'>
+<Link href={'https://www.imiprompt.com'} target={'_blank'} className='flex justify-between pb-2 pt-2 pl-4 pr-4'>
     <button className=''>עוזר פרומפטים
     </button>
     <div>
@@ -427,9 +424,9 @@ setActiveChat(pathName.includes('/chat'))
 </div>
 
 
-<button className='rounded-xl group hover:bg-white mt-5' onClick={()=>setClicked(!clicked)}>
+<button className='rounded-xl group hover:bg-white mt-5 cursor-pointer' onClick={()=>setClicked(!clicked)}>
   
-<div className='p-2    flex justify-between pb-2 pt-2 pl-4 pr-4' >
+<div className='p-2 flex justify-between pb-2 pt-2 pl-4 pr-4 ' >
 <button className=''>
 לסגירה
 </button>  

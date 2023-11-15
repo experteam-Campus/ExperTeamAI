@@ -27,10 +27,10 @@ export default function Docfile({fileID}:Props) {
   const [He,setHE] = useState(true);
   const [prompt, setPrompt] = useState("");
   const [newprompt, setNewPrompt] = useState<any[]>([]);
-    const [promptSubject, setPromptSubject] = useState("");
-    const [promptTarget, setPromptTarget] = useState("");
-    const [promptAudience, setAudience] = useState("");
-    const [promptFoucs, setFoucs] = useState("");
+  const [promptSubject, setPromptSubject] = useState("");
+  const [promptTarget, setPromptTarget] = useState("");
+  const [promptAudience, setAudience] = useState("");
+  const [promptFoucs, setFoucs] = useState("");
     const [selectedItem, setSelectedItem] = useState("option");
     const [promptSummarize, setPromptSummarize] = useState("");
     const [promptKeywords, setPromptKeywords] = useState("");
@@ -111,25 +111,29 @@ const [messagas] = useCollection(session&&query(collection(db,"users",session?.u
 
 
   return (
-<div className='flex justify-center'>
-   <div>
-    <select name="ChoosenPrompt" id="ChoosenPrompt" onChange={(e)=>{setSelectedItem(e.target.value)}} defaultValue={selectedItem}>
-    <option value="option">במה אפשר לעזור?</option>
-    <option value="QuestionForStackHolder">שאלות לתחקור ראשוני</option>
-    <option value="QuestionForLLearner">שאלות ללומד</option>
-    <option value="SummarizeText">סיכום טקסט</option>
-    <option value="Keywords">הוצאת מילות מפתח מקסט</option>
-    <option value="VyondScript">יצירת תסריט לויאונד</option>
-    <option value="outline">יצירת מתווה </option>
-    </select>
+    
+<div className='flex justify-center flex-col'>
 
-    <select name="ChoosenLang" id="ChoosenLang" onChange={(e)=>{setHE(!{He})}} defaultValue={"עברית"}>
+   <div>
+    <p>במה אפשר לעזור?</p>
+    <div className='flex'>
+    <button className={`btnTextEditor ${selectedItem == "QuestionForStackHolder" ? `bg-[#41394B] text-white`:''}`} onClick={(e)=>{setSelectedItem("QuestionForStackHolder")}}>שאלות לתחקור ראשוני</button>
+    <button className={`btnTextEditor ${selectedItem == "QuestionForLLearner" ? `bg-[#41394B] text-white`:''}`} onClick={(e)=>{setSelectedItem("QuestionForLLearner")}}>שאלות ללומד</button>
+    <button className={`btnTextEditor ${selectedItem == "SummarizeText" ? `bg-[#41394B] text-white`:''}`} onClick={(e)=>{setSelectedItem("SummarizeText")}}>סיכום טקסט</button>
+    <button className={`btnTextEditor ${selectedItem == "Keywords" ? `bg-[#41394B] text-white`:''}`} onClick={(e)=>{setSelectedItem("Keywords")}}>הוצאת מילות מפתח מטקסט</button>
+    <button className={`btnTextEditor ${selectedItem == "outline" ? `bg-[#41394B] text-white`:''}`} onClick={(e)=>{setSelectedItem("outline")}}>יצירת מתווה </button>
+   </div>
+
+    <select className='float-left ml-8 selectLang' name="ChoosenLang" id="ChoosenLang" onChange={(e)=>{setHE(!{He})}} defaultValue={"עברית"}>
     <option value="option">עברית</option>
     <option value="QuestionForStackHolder">אנגלית</option>
     </select>
 
+<div className='form_container flex mt-8'>
+
+<div className='draw'>
 {selectedItem == "QuestionForStackHolder" ? 
-   <form className='flex flex-col m-4 w-1/4' onSubmit={sendtoGPT} onChange={setPromptOnChangeQforStackholder}> 
+   <form className='flex flex-col m-4 w-full' onSubmit={sendtoGPT} onChange={setPromptOnChangeQforStackholder}> 
     <label htmlFor='subject'>נושא הקורס
     <input value={promptSubject} onChange={(e)=>setPromptSubject(e.target.value)} type="text" id='subject' placeholder='Please type the subject of the lesson' name='subject' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
     <label htmlFor='audience'>מטרת השיעור
@@ -138,11 +142,23 @@ const [messagas] = useCollection(session&&query(collection(db,"users",session?.u
     <input value={promptAudience} onChange={(e)=>setAudience(e.target.value)} type="text" id='audience' placeholder='Please type the target audience of the lesson' name='audience' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
     <label htmlFor='focus'>במה תרצו שהשאלות יתמקדו? (Optional)
     <input value={promptFoucs} onChange={(e)=>setFoucs(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
-    <button disabled={!promptSubject || !promptTarget || !promptAudience} className='flex items-center bg-[#E1539E] p-3 rounded-md text-white hover:bg-[#f25aab] transition-all ease-in'>הצג שאלות לראיון</button>
+
+    <div className="formBTN float-left  pt-2 pb-2 pl-8 pr-10 flex group" >
+        <button className='font-normal text-white flex justify-center items-center hover:text-[#FF3067] group-hover:text-[#FF3067] gap-[14px]' disabled={!promptSubject || !promptTarget || !promptAudience}>
+         הצג שאלות לראיון
+         <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+        <path d="M17.2278 3.27684L9.72688 10.7778C8.84103 11.6636 8.84103 13.1132 9.72688 13.999L17.2278 21.5" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        </div>
+        </button>
+    </div>
+
+
    </form>
 :
 selectedItem == "QuestionForLLearner"? 
-<form className='flex flex-col m-4 w-1/4' onSubmit={sendtoGPT} onChange={setPromptOnChangeQforQuestionForLLearner}> 
+<form className='flex flex-col m-4 w-full' onSubmit={sendtoGPT} onChange={setPromptOnChangeQforQuestionForLLearner}> 
     <label htmlFor='subject'>נושא הקורס
     <input value={promptSubject} onChange={(e)=>setPromptSubject(e.target.value)} type="text" id='subject' placeholder='Please type the subject of the lesson' name='subject' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
     <label htmlFor='audience'>מטרת השיעור
@@ -151,7 +167,20 @@ selectedItem == "QuestionForLLearner"?
     <input value={promptAudience} onChange={(e)=>setAudience(e.target.value)} type="text" id='audience' placeholder='Please type the target audience of the lesson' name='audience' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
     <label htmlFor='focus'>במה תרצו שהשאלות יתמקדו? (Optional)
     <input value={promptFoucs} onChange={(e)=>setFoucs(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
-    <button disabled={!promptSubject || !promptTarget || !promptAudience} className='flex items-center bg-[#E1539E] p-3 rounded-md text-white hover:bg-[#f25aab] transition-all ease-in'>הצג שאלות ללומד</button>
+
+    <div className="formBTN float-left  pt-2 pb-2 pl-8 pr-10 flex group" >
+        <button className='font-normal text-white flex justify-center items-center hover:text-[#FF3067] group-hover:text-[#FF3067] gap-[14px]' disabled={!promptSubject || !promptTarget || !promptAudience}>
+         הצג שאלות ללומד
+         <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+        <path d="M17.2278 3.27684L9.72688 10.7778C8.84103 11.6636 8.84103 13.1132 9.72688 13.999L17.2278 21.5" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        </div>
+        </button>
+    </div>
+
+
+   
    </form>:
 selectedItem == "option"? 
 null:
@@ -159,24 +188,62 @@ selectedItem == "SummarizeText"?
 <form onSubmit={sendtoGPT}> 
   <label htmlFor='focus'>איזה טקסט לסכם?
     <input value={promptSummarize} onChange={(e)=>setPromptSummarize(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
-    <button disabled={!promptSummarize } className='flex items-center bg-[#E1539E] p-3 rounded-md text-white hover:bg-[#f25aab] transition-all ease-in'>סכם את הטקסט</button>
+
+<div className='flex flex-col'>
+    <div className="formBTN  pt-2 pb-2 pl-8 pr-10 flex group">
+        <button className='font-normal text-white flex  items-center hover:text-[#FF3067] group-hover:text-[#FF3067] gap-[14px]' disabled={!promptSummarize }>
+         סכם את הטקסט
+         <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+        <path d="M17.2278 3.27684L9.72688 10.7778C8.84103 11.6636 8.84103 13.1132 9.72688 13.999L17.2278 21.5" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        </div>
+        </button>
+    </div>
+
+    
     <Link href={'https://www.humata.ai/'} target={'_blank'} className="underline mt-2 text-blue-600">
     רוצה לסכם PDF?
     </Link>
+    </div>
+
    </form>:
 selectedItem == "Keywords"? 
 <form onSubmit={sendtoGPT}> 
   <label htmlFor='focus'>הכנס טקסט להוצאת מילות מפתח
-    <input value={promptKeywords} onChange={(e)=>setPromptKeywords(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
-    <button disabled={!promptKeywords } className='flex items-center bg-[#E1539E] p-3 rounded-md text-white hover:bg-[#f25aab] transition-all ease-in'> הוצא מילות מפתח </button>
-   </form>:
+    <input value={promptKeywords} onChange={(e)=>setPromptKeywords(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border border-5 border-gray-600 focus:outline-none mb-6'/></label>
+
+    <div className="formBTN  pt-2 pb-2 pl-8 pr-10 flex group">
+        <button className='font-normal text-white flex  items-center hover:text-[#FF3067] group-hover:text-[#FF3067] gap-[14px]' disabled={!promptKeywords }>
+        הוצא מילות מפתח
+         <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+        <path d="M17.2278 3.27684L9.72688 10.7778C8.84103 11.6636 8.84103 13.1132 9.72688 13.999L17.2278 21.5" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        </div>
+        </button>
+    </div>
+
+</form>:
 selectedItem == "VyondScript"? 
 <div>VyondScript</div>:
 selectedItem == "outline"? 
 <form onSubmit={sendtoGPT}> 
   <label htmlFor='focus'>הכנס טקסט:
     <input value={promptOutline} onChange={(e)=>setPromptOutline(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
-    <button disabled={!promptOutline } className='flex items-center bg-[#E1539E] p-3 rounded-md text-white hover:bg-[#f25aab] transition-all ease-in'> יצירת מתווה</button>
+   
+    <div className="formBTN  pt-2 pb-2 pl-8 pr-10 flex group">
+        <button className='font-normal text-white flex  items-center hover:text-[#FF3067] group-hover:text-[#FF3067] gap-[14px]' disabled={!promptOutline}>
+יצירת מתווה
+         <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+        <path d="M17.2278 3.27684L9.72688 10.7778C8.84103 11.6636 8.84103 13.1132 9.72688 13.999L17.2278 21.5" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        </div>
+        </button>
+    </div>
+   
+   
    </form>:
 null
 }
@@ -188,13 +255,13 @@ null
           </div>
         </div>
       </div>
-
-     
 </div>
 
-{/* <Editor fileID={fileID}></Editor>*/}
-{<Editor fileID={fileID} ></Editor>}
 
+{<Editor fileID={fileID} ></Editor>}
+</div>
+
+</div>
 
 </div>
 

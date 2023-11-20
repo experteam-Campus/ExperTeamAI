@@ -102,7 +102,7 @@ export default function  TtsText () {
 
 
   return (
-    <div className='flex flex-col flex-wrap pl-28 pr-40'>
+    <div className='flex flex-col flex-wrap pl-28 pr-40 w-full'>
     <form onSubmit={sendText} className=''>
 
 

@@ -22,14 +22,14 @@ export default async function page({params:{fileID}}:Props) {
 
   return (
     <div className='h-full p-3'>
-    <div className='h-[100.3%]'>
+    <div className='h-[100.3%] flex'>
 <SessionProvider session={session}>
 
-<div className=' '>
+
 <BtnNav></BtnNav>
-<div className='m-auto mr-28'>
+<div className='w-full'>
 <Docfile fileID={fileID}></Docfile>
-</div>
+
 </div>
 
  {/*<Editor fileID={fileID}></Editor>*/}

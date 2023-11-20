@@ -34,7 +34,7 @@ const createNewChat=async () => {
 }
 
   return (
-<div className='p-3 w-[300px]  flex flex-col mr-20' >
+<div className='p-3 min-w-[300px]  flex flex-col' >
 <h1 className='m-auto mt-1 mb-1 p-3'>עוזר אישי</h1>
 <button onClick={createNewChat} className='group newChatBTN flex justify-between items-center bg-[#FFF] p-3 rounded-md text-[#FF3067] hover:bg-[#FF3067] transition-all ease-in mb-2'>
 יצירת צ'אט חדש

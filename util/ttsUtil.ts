@@ -81,12 +81,12 @@ if(ssmlGender=='Men'){
 if(ssmlGender=='Female'){
   ssmlGender=='FEMALE'
 }
-
+// ${text}
 const [response] = await client.synthesizeSpeech({
   input: { 
     ssml: 
-  `<speak>
-  ${text}
+ ` <speak>
+ ${text}
   </speak>` },
   voice: { languageCode: countrycodeArr, name: selectedLangCode },
   audioConfig: { audioEncoding: 'MP3', pitch: 0, speakingRate: 1.12 },

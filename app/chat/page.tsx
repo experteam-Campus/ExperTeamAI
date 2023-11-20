@@ -12,15 +12,12 @@ export default async function chatHomePage() {
 
   return (
     <div className='h-full p-3'>
-    <div className='flex h-[100.3%]'>
-
-        <SessionProvider session={session}>
-          <div className="rounded-xl  border border-solid border-white backdrop-blur-[28.5px]   w-fit" style={{ 
-      background: 'rgba(255, 255, 255, 0.57)'
-  }}>
-    
     <div className='flex '>
-    <BtnNav></BtnNav>
+    <SessionProvider session={session}>
+     <div >
+    
+    <div className='flex'>
+        <BtnNav></BtnNav>
         <Chats></Chats>
         </div>
         </div>

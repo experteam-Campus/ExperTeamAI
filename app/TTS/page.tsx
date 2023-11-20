@@ -22,7 +22,7 @@ export default async function page() {
 
   return (
     <div className='h-full p-3'>
-    <div className=' h-[100.3%]'>
+    <div className=' h-[100.3%] flex'>
  <SessionProvider session={session}>
 
   <BtnNav></BtnNav>

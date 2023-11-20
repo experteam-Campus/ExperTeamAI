@@ -4,8 +4,6 @@ import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
 
-
-
 export default function Logout() {
 
   let backtoHome=''
@@ -24,7 +22,7 @@ const logout=(()=>{
         </svg>
          </div>
         </button>
-      
-    </Link></div>
+    </Link>
+    </div>
   )
 }

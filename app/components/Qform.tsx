@@ -33,22 +33,30 @@ export default function Qform() {
 
   return (
 
-   <div className='m-5'>
+   <div className='z-50'>
    
-
-
-
    <form className='' onSubmit={createNewDoc}> 
    
-    <button  className=' bg-[#E1539E] p-3 rounded-md text-white hover:bg-[#f25aab] transition-all ease-in'>יצירת מסמך חדש</button>
+   <div  className="logoutBTN float-left m-5 pt-2 pb-2 pl-8 pr-10 flex group " >
+        <button className='font-normal text-white flex justify-center items-center hover:text-[#FF3067] group-hover:text-[#FF3067] gap-[14px]' >
+         יצירת מסמך חדש
+         <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+        <path d="M17.2278 3.27684L9.72688 10.7778C8.84103 11.6636 8.84103 13.1132 9.72688 13.999L17.2278 21.5" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+         </div>
+        </button>
+    </div>
+
+
    </form>
-   {!docsFils?(
+   {/*!docsFils?(
    <div className=''>אין מסמכים קיימים</div>):
    (
     docsFils?.docs.map((docsFile)=>
    <DocInfo key={docsFile.id} info={docsFile}></DocInfo>
    )
-   )}
+   )*/}
 
 
 </div>

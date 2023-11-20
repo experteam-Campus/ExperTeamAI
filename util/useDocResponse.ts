@@ -22,7 +22,7 @@ type Props2={
 }
 
 export const useDocResponse =(()=>{
-  let msgHistory:any=[{role:'system',content:'you are a Content Writer with 30 years of experience, your name is Expy'}];
+  let msgHistory:any=[{role:'system',content:'You are a helpful assistant instructional designer.'}];
 
 
     const  handleMessageSubmit = (async({prompt,setPrompt,newprompt,session,fileID}:Props)=>{

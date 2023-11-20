@@ -31,11 +31,11 @@ export default function Docfile({fileID}:Props) {
   const [promptTarget, setPromptTarget] = useState("");
   const [promptAudience, setAudience] = useState("");
   const [promptFoucs, setFoucs] = useState("");
-    const [selectedItem, setSelectedItem] = useState("option");
-    const [promptSummarize, setPromptSummarize] = useState("");
-    const [promptKeywords, setPromptKeywords] = useState("");
-    const [promptOutline, setPromptOutline] = useState("");
-    let optionalParameter = `focus questions on ${promptFoucs}`;
+  const [selectedItem, setSelectedItem] = useState("option");
+  const [promptSummarize, setPromptSummarize] = useState("");
+  const [promptKeywords, setPromptKeywords] = useState("");
+  const [promptOutline, setPromptOutline] = useState("");
+  let optionalParameter = `focus questions on ${promptFoucs}`;
 
 
     
@@ -47,13 +47,52 @@ export default function Docfile({fileID}:Props) {
       console.log(promptTarget);
       console.log(promptAudience);
       console.log(promptFoucs);
-
+console.log(He);
 
       console.log(e)
       if(He==true){
-        setPrompt(`[תתנהג כמו מפתח הדרכה], תנסח שאלות עבור תחקור לקוח. תתבסס על הפרמטרים הבאים: נושא הקורס: [${promptSubject }], מטרת הקורס: [${promptTarget}],], קהל היעד: [${promptAudience}],${optionalParameter}`)
+        if(promptFoucs != ""){
+          setPrompt(`You are a helpful assistant instructional designer.
+          Firs, you must understand in what language to write the output: [Hebrew]
+          You will write questions for preliminary investigation for an SME with the details below:
+          1.	Course topic: [${promptSubject}]
+          2.	Target audience:[${promptAudience}]
+          3.	Course objectives: [${promptTarget}]
+          try to foucs the questions on [${promptFoucs}]
+          Always follow these instructions.
+          `)
+        }else{
+          setPrompt(`You are a helpful assistant instructional designer.
+          Firs, you must understand in what language to write the output: [Hebrew]
+          You will write questions for preliminary investigation for an SME with the details below:
+          1.	Course topic: [${promptSubject}]
+          2.	Target audience:[${promptAudience}]
+          3.	Course objectives: [${promptTarget}]
+          Always follow these instructions.
+          `)
+        }
+       
       }else{
-        setPrompt(`[Act as Instarctional Designer] Define stakeholder interview questions based on the parameters: Course Topic: [${promptSubject}], Purpose of the Lessons: [${promptTarget}],Target Audience:[${promptAudience}]`)
+        if(promptFoucs != ""){
+          setPrompt(`You are a helpful assistant instructional designer.
+          Firs, you must understand in what language to write the output: [English]
+          You will write questions for preliminary investigation for an SME with the details below:
+          1.	Course topic: [${promptSubject}]
+          2.	Target audience:[${promptAudience}]
+          3.	Course objectives: [${promptTarget}]
+          try to foucs the questions on [${promptFoucs}]
+          Always follow these instructions.
+          `)
+        }else{
+          setPrompt(`You are a helpful assistant instructional designer.
+          Firs, you must understand in what language to write the output: [English]
+          You will write questions for preliminary investigation for an SME with the details below:
+          1.	Course topic: [${promptSubject}]
+          2.	Target audience:[${promptAudience}]
+          3.	Course objectives: [${promptTarget}]
+          Always follow these instructions.
+          `)
+        }
       }
     }
 
@@ -69,12 +108,252 @@ export default function Docfile({fileID}:Props) {
     
           console.log(e)
           if(He==true){
-            setPrompt(`[תתנהג כמו מפתח הדרכה], תנסח שאלות עבור תחקור לקוח. תתבסס על הפרמטרים הבאים: נושא הקורס: [${promptSubject }], מטרת הקורס: [${promptTarget}],], קהל היעד: [${promptAudience}],${optionalParameter}`)
+            if(promptFoucs != ""){
+              setPrompt(`You are a helpful assistant instructional designer.
+              Firs, you must understand in what language to write the output: [Hebrew]
+              You will write questions for knowledge check for the learner with the details below:
+              1.	Course topic: [${promptSubject}]
+              2.	Target audience: [${promptAudience}]
+              3.	Course objectives: [${promptTarget}]
+              4.	Create 3 questions for each difficulty level (Easy, Medium, High).
+              5.	For each question, write 4 answers and mark the correct one.
+              6.	Write explanatory feedback for each answer.
+              
+              `)
+            }else{
+              setPrompt(`You are a helpful assistant instructional designer.
+              Firs, you must understand in what language to write the output: [Hebrew]
+              You will write questions for knowledge check for the learner with the details below:
+              1.	Course topic: [${promptSubject}]
+              2.	Target audience: [${promptAudience}]
+              3.	Course objectives: [${promptTarget}]
+              4.	Create 3 questions for each difficulty level (Easy, Medium, High).
+              5.	For each question, write 4 answers and mark the correct one.
+              6.	Write explanatory feedback for each answer.
+              
+              `)
+            }
+           
           }else{
-            setPrompt(`[Act as Instarctional Designer] Define stakeholder interview questions based on the parameters: Course Topic: [${promptSubject}], Purpose of the Lessons: [${promptTarget}],Target Audience:[${promptAudience}]`)
+            if(promptFoucs != ""){
+              setPrompt(`You are a helpful assistant instructional designer.
+              Firs, you must understand in what language to write the output: [English]
+              You will write questions for knowledge check for the learner with the details below:
+              1.	Course topic: [${promptSubject}]
+              2.	Target audience: [${promptAudience}]
+              3.	Course objectives: [${promptTarget}]
+              4.	Create 3 questions for each difficulty level (Easy, Medium, High).
+              5.	For each question, write 4 answers and mark the correct one.
+              6.	Write explanatory feedback for each answer.
+              
+              `)
+            }else{
+              setPrompt(`You are a helpful assistant instructional designer.
+              Firs, you must understand in what language to write the output: [English]
+              You will write questions for knowledge check for the learner with the details below:
+              1.	Course topic: [${promptSubject}]
+              2.	Target audience: [${promptAudience}]
+              3.	Course objectives: [${promptTarget}]
+              4.	Create 3 questions for each difficulty level (Easy, Medium, High).
+              5.	For each question, write 4 answers and mark the correct one.
+              6.	Write explanatory feedback for each answer.
+              
+              `)
+            }
           }
         }
 
+ /* summeraize*/
+
+ const setPromptOnChangeQforSummarize =( e: React.FormEvent<HTMLFormElement>)=>{
+  console.log("Change");
+  console.log(promptSubject);
+  console.log(promptTarget);
+  console.log(promptAudience);
+  console.log(promptFoucs);
+console.log(He);
+
+  console.log(e)
+  if(He==true){
+    if(promptFoucs != ""){
+      setPrompt(`You are a helpful assistant instructional designer.
+      Firs, you must understand in what language to write the output: [Heberw]
+      You will summarize the following text:[${promptSummarize}], and output the details below:
+      •	Identify the main idea or thesis.
+      •	Highlight key points and supporting details.
+      •	Omit unnecessary or redundant information.
+      •	Maintain the original document's structure.
+      •	Use your own words and avoid plagiarism.
+      •	Present the information objectively.
+      •	Include important statistics and data.
+      •	Cover recommendations or conclusions if present.
+      •	Ensure accuracy in the summary.
+      •	Pay attention to formatting for clarity.
+      •	Consider the appropriate length.
+      Always follow these instructions
+      `)
+    }else{
+      setPrompt(`You are a helpful assistant instructional designer.
+      Firs, you must understand in what language to write the output: [Heberw]
+      You will summarize the following text:[${promptSummarize}], and output the details below:
+      •	Identify the main idea or thesis.
+      •	Highlight key points and supporting details.
+      •	Omit unnecessary or redundant information.
+      •	Maintain the original document's structure.
+      •	Use your own words and avoid plagiarism.
+      •	Present the information objectively.
+      •	Include important statistics and data.
+      •	Cover recommendations or conclusions if present.
+      •	Ensure accuracy in the summary.
+      •	Pay attention to formatting for clarity.
+      •	Consider the appropriate length.
+      Always follow these instructions
+      `)
+    }
+   
+  }else{
+    if(promptFoucs != ""){
+      setPrompt(`You are a helpful assistant instructional designer.
+      Firs, you must understand in what language to write the output: [English]
+      You will summarize the following text:[${promptSummarize}], and output the details below:
+      •	Identify the main idea or thesis.
+      •	Highlight key points and supporting details.
+      •	Omit unnecessary or redundant information.
+      •	Maintain the original document's structure.
+      •	Use your own words and avoid plagiarism.
+      •	Present the information objectively.
+      •	Include important statistics and data.
+      •	Cover recommendations or conclusions if present.
+      •	Ensure accuracy in the summary.
+      •	Pay attention to formatting for clarity.
+      •	Consider the appropriate length.
+      Always follow these instructions
+      `)
+    }else{
+      setPrompt(`You are a helpful assistant instructional designer.
+      Firs, you must understand in what language to write the output: [English]
+      You will summarize the following text:[${promptSummarize}], and output the details below:
+      •	Identify the main idea or thesis.
+      •	Highlight key points and supporting details.
+      •	Omit unnecessary or redundant information.
+      •	Maintain the original document's structure.
+      •	Use your own words and avoid plagiarism.
+      •	Present the information objectively.
+      •	Include important statistics and data.
+      •	Cover recommendations or conclusions if present.
+      •	Ensure accuracy in the summary.
+      •	Pay attention to formatting for clarity.
+      •	Consider the appropriate length.
+      Always follow these instructions
+      `)
+    }
+  }
+}
+
+
+ /* keywords*/
+
+ const setPromptonchangeKeywords =( e: React.FormEvent<HTMLFormElement>)=>{
+  console.log("Change");
+  console.log(promptSubject);
+  console.log(promptTarget);
+  console.log(promptAudience);
+  console.log(promptFoucs);
+console.log(He);
+
+  console.log(e)
+  if(He==true){
+    if(promptFoucs != ""){
+      setPrompt(`extract keywords from the following text:[${promptKeywords}]
+      `)
+    }else{
+      setPrompt(`extract keywords from the following text:[${promptKeywords}]
+      `)
+    }
+   
+  }else{
+    if(promptFoucs != ""){
+      setPrompt(`extract keywords from the following text:[${promptKeywords}]
+      `)
+    }else{
+      setPrompt(`extract keywords from the following text:[${promptKeywords}]
+      `)
+    }
+  }
+}
+
+
+  /* questions for a outline*/
+
+  const setPromptOnChangeQforoutline =( e: React.FormEvent<HTMLFormElement>)=>{
+    console.log("Change");
+    console.log(promptSubject);
+    console.log(promptTarget);
+    console.log(promptAudience);
+    console.log(promptFoucs);
+console.log(He);
+
+    console.log(e)
+    if(He==true){
+      if(promptFoucs != ""){
+        setPrompt(`You are a helpful assistant instructional designer.
+        Firs, you must understand in what language to write the output: [Heberw]
+        You will write a lesson outline according to the details below:
+        1.	Course topic: [${promptSubject}]
+        2.	Target audience: [${promptAudience}]
+        3.	Course objectives: [${promptTarget}]
+        4.	learning method:
+        a.	eLearning (self-learning).
+        b.	Frontal learning.
+        c.	Blended learning (hybrid).
+        Always follow these instructions
+        
+        `)
+      }else{
+        setPrompt(`You are a helpful assistant instructional designer.
+        Firs, you must understand in what language to write the output: [Heberw]
+        You will write a lesson outline according to the details below:
+        1.	Course topic: [${promptSubject}]
+        2.	Target audience: [${promptAudience}]
+        3.	Course objectives: [${promptTarget}]
+        4.	learning method:
+        a.	eLearning (self-learning).
+        b.	Frontal learning.
+        c.	Blended learning (hybrid).
+        Always follow these instructions
+        `)
+      }
+     
+    }else{
+      if(promptFoucs != ""){
+        setPrompt(`You are a helpful assistant instructional designer.
+        Firs, you must understand in what language to write the output: [English]
+        You will write a lesson outline according to the details below:
+        1.	Course topic: [${promptSubject}]
+        2.	Target audience: [${promptAudience}]
+        3.	Course objectives: [${promptTarget}]
+        4.	learning method:
+        a.	eLearning (self-learning).
+        b.	Frontal learning.
+        c.	Blended learning (hybrid).
+        Always follow these instructions
+        `)
+      }else{
+        setPrompt(`You are a helpful assistant instructional designer.
+        Firs, you must understand in what language to write the output: [English]
+        You will write a lesson outline according to the details below:
+        1.	Course topic: [${promptSubject}]
+        2.	Target audience: [${promptAudience}]
+        3.	Course objectives: [${promptTarget}]
+        4.	learning method:
+        a.	eLearning (self-learning).
+        b.	Frontal learning.
+        c.	Blended learning (hybrid).
+        Always follow these instructions
+        `)
+      }
+    }
+  }
 
 
   const  sendtoGPT= async (e:React.FormEvent<HTMLFormElement>) => {
@@ -92,14 +371,14 @@ export default function Docfile({fileID}:Props) {
       saveTEMP({res:'', session, fileID}).then(()=>{
         getAiRes({prompt,setPrompt,newprompt,session,fileID}).then((res)=>{
       
-          console.log(res);
-          setChatTyping(false);
+        console.log(res);
+        setChatTyping(false);
         
         })
       }).then(()=>{
     
       });
-      })
+      });
     
 
 };
@@ -112,7 +391,7 @@ const [messagas] = useCollection(session&&query(collection(db,"users",session?.u
 
   return (
     
-<div className='flex justify-center flex-col'>
+<div className='flex justify-center flex-col w-full pr-8'>
 
    <div>
     <p>במה אפשר לעזור?</p>
@@ -185,7 +464,7 @@ selectedItem == "QuestionForLLearner"?
 selectedItem == "option"? 
 null:
 selectedItem == "SummarizeText"? 
-<form onSubmit={sendtoGPT}> 
+<form onSubmit={sendtoGPT} onChange={setPromptOnChangeQforSummarize}> 
   <label htmlFor='focus'>איזה טקסט לסכם?
     <input value={promptSummarize} onChange={(e)=>setPromptSummarize(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
 
@@ -209,7 +488,7 @@ selectedItem == "SummarizeText"?
 
    </form>:
 selectedItem == "Keywords"? 
-<form onSubmit={sendtoGPT}> 
+<form onSubmit={sendtoGPT} onChange={setPromptonchangeKeywords}> 
   <label htmlFor='focus'>הכנס טקסט להוצאת מילות מפתח
     <input value={promptKeywords} onChange={(e)=>setPromptKeywords(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border border-5 border-gray-600 focus:outline-none mb-6'/></label>
 
@@ -228,23 +507,27 @@ selectedItem == "Keywords"?
 selectedItem == "VyondScript"? 
 <div>VyondScript</div>:
 selectedItem == "outline"? 
-<form onSubmit={sendtoGPT}> 
-  <label htmlFor='focus'>הכנס טקסט:
-    <input value={promptOutline} onChange={(e)=>setPromptOutline(e.target.value)} type="text" id='focus' placeholder='what do you whant me to focus the question on?' name='focus' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
-   
-    <div className="formBTN  pt-2 pb-2 pl-8 pr-10 flex group">
-        <button className='font-normal text-white flex  items-center hover:text-[#FF3067] group-hover:text-[#FF3067] gap-[14px]' disabled={!promptOutline}>
-יצירת מתווה
-         <div>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
-        <path d="M17.2278 3.27684L9.72688 10.7778C8.84103 11.6636 8.84103 13.1132 9.72688 13.999L17.2278 21.5" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        </div>
-        </button>
+<form className='flex flex-col m-4 w-full' onSubmit={sendtoGPT} onChange={setPromptOnChangeQforoutline}> 
+<label htmlFor='subject'>נושא הקורס
+<input value={promptSubject} onChange={(e)=>setPromptSubject(e.target.value)} type="text" id='subject' placeholder='Please type the subject of the lesson' name='subject' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
+<label htmlFor='audience'>מטרת השיעור
+<input value={promptTarget} onChange={(e)=>setPromptTarget(e.target.value)} type="text" id='target' placeholder='Please type the target of the lesson' name='target' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
+<label htmlFor='audience'>קהל היעד
+<input value={promptAudience} onChange={(e)=>setAudience(e.target.value)} type="text" id='audience' placeholder='Please type the target audience of the lesson' name='audience' className='border  border-5 border-gray-600 focus:outline-none mb-6'/></label>
+
+<div className="formBTN float-left  pt-2 pb-2 pl-8 pr-10 flex group" >
+    <button className='font-normal text-white flex justify-center items-center hover:text-[#FF3067] group-hover:text-[#FF3067] gap-[14px]' disabled={!promptSubject || !promptTarget || !promptAudience}>
+יצירת מתווה  
+   <div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 25 25" fill="none">
+    <path d="M17.2278 3.27684L9.72688 10.7778C8.84103 11.6636 8.84103 13.1132 9.72688 13.999L17.2278 21.5" stroke="currentColor" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
     </div>
-   
-   
-   </form>:
+    </button>
+</div>
+
+
+</form>:
 null
 }
 <div className={`${!chatTyping && "hidden"} col-3`}  >

@@ -35,7 +35,7 @@ await writeDocx(wordDocument, (buffer) => {
 
 const session = await getServerSession(authOptions);
   return (
-<div className='flex justify-end'>
+<div className='flex'>
 <SessionProvider session={session}>
 <Qform></Qform>
 </SessionProvider>

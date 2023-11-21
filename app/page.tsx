@@ -31,10 +31,10 @@ export default async function HomePage() {
    <Login ></Login>
 ):(
   <>
-  <div className=''>
+  
     <BtnNav></BtnNav>
    <HomepageElements></HomepageElements>
-   </div>
+  
   </>
     )}  
      </SessionProvider> 

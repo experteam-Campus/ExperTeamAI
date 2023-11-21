@@ -14,7 +14,7 @@ export default function Hello() {
 
   return (
  
-    <div className='   flex justify-center flex-col relative top-[-43rem]'>
+    <div className='   flex justify-center flex-col relative top-[-80%]'>
     <p className='HomeParagrph m-auto' >"ברוכים הבאים לעתיד של זרימת עבודה יצירתית! הפלטפורמה שלנו המופעלת באמצעות AI,  אשר תשפר את עבודתינו ותספק כלים חכמים שמשפרים את היעילות ותשחרר את יצירתיות."</p>
  
             {/*כפתור לרובוט */}

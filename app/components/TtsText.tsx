@@ -7,6 +7,7 @@ import { db } from '../../firebase';
 import { TextToSpeechClient } from '@google-cloud/text-to-speech';
 import { async } from '@firebase/util';
 import { uniqueId } from 'remirror';
+import Link from 'next/link';
 
 
 interface MyData {
@@ -135,6 +136,18 @@ export default function  TtsText () {
     onChange={(e)=>setText(e.target.value)}
     className='flex-1  p-3 focus:outline-none text-gray-500 h-[18em]   border-b-2  rounded-xl border border-solid border-white backdrop-blur-[28.5px]' style={{ background: 'rgba(255, 255, 255, 0.80)'}}  placeholder='Write the sentences'>
 </textarea>
+
+<div className='bg-white border border-[#ff3067] rounded-full group hover:bg-[#ff3067] w-fit mt-3 hover:text-white'>
+   <Link href={'https://nakdan.dicta.org.il/'} target={'_blank'} className='flex justify-between pb-2 pt-2 pl-4 pr-4'>
+ 
+    צריכים קריינות בעברית? כנסו לנקדן!
+  
+    <div>
+   
+    </div>
+   </Link>
+</div>
+
 
 {/*<select id="ssmlGender" value={ssmlGender} onChange={(e)=> setSsmlGender(e.target.value)}>
     <option  value='Female'>Female</option>

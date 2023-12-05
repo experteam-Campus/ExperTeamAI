@@ -110,26 +110,32 @@ console.log(He);
           if(He==true){
             if(promptFoucs != ""){
               setPrompt(`You are a helpful assistant instructional designer.
-              Firs, you must understand in what language to write the output: [Hebrew]
-              You will write questions for knowledge check for the learner with the details below:
+              Firs, you must understand in what language to write the output: [Heberw]
+              You will write questions for knowledge check for the learner with the details below,
+              please follow the steps religiously, dont miss any steps:
               1.	Course topic: [${promptSubject}]
               2.	Target audience: [${promptAudience}]
               3.	Course objectives: [${promptTarget}]
-              4.	Create 3 questions for each difficulty level (Easy, Medium, High).
-              5.	For each question, write 4 answers and mark the correct one.
-              6.	Write explanatory feedback for each answer.
+              4.	CREATE 3 QUESTIONS FOR EASY DIFFICULTY LEVEL
+              5. CREATE 3 QUESTIONS FOR MEDIUM DIFFICULTY LEVEL
+              6.CREATE 3 QUESTIONS FOR HIGH DIFFICULTY LEVEL
+              7.	FOR EACH QUESTION, WRITE 4 ANSWERS AND MARK THE CORRECT ONE.
+              8.	WRITE EXPLANATORY FEEDBACK FOR EACH ANSWER.
               
               `)
             }else{
               setPrompt(`You are a helpful assistant instructional designer.
-              Firs, you must understand in what language to write the output: [Hebrew]
-              You will write questions for knowledge check for the learner with the details below:
+              Firs, you must understand in what language to write the output: [Heberw]
+              You will write questions for knowledge check for the learner with the details below,
+              please follow the steps religiously, dont miss any steps:
               1.	Course topic: [${promptSubject}]
               2.	Target audience: [${promptAudience}]
               3.	Course objectives: [${promptTarget}]
-              4.	Create 3 questions for each difficulty level (Easy, Medium, High).
-              5.	For each question, write 4 answers and mark the correct one.
-              6.	Write explanatory feedback for each answer.
+              4.	CREATE 3 QUESTIONS FOR EASY DIFFICULTY LEVEL
+              5. CREATE 3 QUESTIONS FOR MEDIUM DIFFICULTY LEVEL
+              6.CREATE 3 QUESTIONS FOR HIGH DIFFICULTY LEVEL
+              7.	FOR EACH QUESTION, WRITE 4 ANSWERS AND MARK THE CORRECT ONE.
+              8.	WRITE EXPLANATORY FEEDBACK FOR EACH ANSWER.
               
               `)
             }
@@ -138,25 +144,31 @@ console.log(He);
             if(promptFoucs != ""){
               setPrompt(`You are a helpful assistant instructional designer.
               Firs, you must understand in what language to write the output: [English]
-              You will write questions for knowledge check for the learner with the details below:
+              You will write questions for knowledge check for the learner with the details below,
+              please follow the steps religiously, dont miss any steps:
               1.	Course topic: [${promptSubject}]
               2.	Target audience: [${promptAudience}]
               3.	Course objectives: [${promptTarget}]
-              4.	Create 3 questions for each difficulty level (Easy, Medium, High).
-              5.	For each question, write 4 answers and mark the correct one.
-              6.	Write explanatory feedback for each answer.
+              4.	CREATE 3 QUESTIONS FOR EASY DIFFICULTY LEVEL
+              5. CREATE 3 QUESTIONS FOR MEDIUM DIFFICULTY LEVEL
+              6.CREATE 3 QUESTIONS FOR HIGH DIFFICULTY LEVEL
+              7.	FOR EACH QUESTION, WRITE 4 ANSWERS AND MARK THE CORRECT ONE.
+              8.	WRITE EXPLANATORY FEEDBACK FOR EACH ANSWER.
               
               `)
             }else{
               setPrompt(`You are a helpful assistant instructional designer.
               Firs, you must understand in what language to write the output: [English]
-              You will write questions for knowledge check for the learner with the details below:
+              You will write questions for knowledge check for the learner with the details below,
+              please follow the steps religiously, dont miss any steps:
               1.	Course topic: [${promptSubject}]
               2.	Target audience: [${promptAudience}]
               3.	Course objectives: [${promptTarget}]
-              4.	Create 3 questions for each difficulty level (Easy, Medium, High).
-              5.	For each question, write 4 answers and mark the correct one.
-              6.	Write explanatory feedback for each answer.
+              4.	CREATE 3 QUESTIONS FOR EASY DIFFICULTY LEVEL
+              5. CREATE 3 QUESTIONS FOR MEDIUM DIFFICULTY LEVEL
+              6.CREATE 3 QUESTIONS FOR HIGH DIFFICULTY LEVEL
+              7.	FOR EACH QUESTION, WRITE 4 ANSWERS AND MARK THE CORRECT ONE.
+              8.	WRITE EXPLANATORY FEEDBACK FOR EACH ANSWER.
               
               `)
             }

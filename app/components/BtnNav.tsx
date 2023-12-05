@@ -74,7 +74,7 @@ setActiveChat(pathName.includes('/chat'))
 
  {/*עוזר אישי */}
  <div className={`rounded-xl group hover:bg-white p-2 w-10 h-10 mb-1 ${activeChat && `bg-white`}`}>
-   <Link href={'/chat'} className='flex justify-center '>
+   <Link href={'https://chat.openai.com/g/g-dcDGVHI7o-experteam-assistant-bot'} target={'_blank'} className='flex justify-center '>
 
     <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className={`text-[#41394B] group-hover:text-[#FF3067] ${activeChat && `text-[#FF3067]`}`}>
@@ -116,9 +116,9 @@ setActiveChat(pathName.includes('/chat'))
 </div>
 
 
-{/* GPT */}
+{/* GPT 
 <div className='rounded-xl group hover:bg-white p-2 w-10 h-10'>
-<Link href={'https://openai.com/gpt-4'} target={'_blank'} className='flex justify-center'>
+<Link href={'https://chat.openai.com/g/g-dcDGVHI7o-experteam-assistant-bot'} target={'_blank'} className='flex justify-center'>
 
     <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='text-[#41394B] group-hover:text-[#FF3067]'>
@@ -133,9 +133,9 @@ setActiveChat(pathName.includes('/chat'))
 </svg>
     </div>
     </Link>
-</div>
-    
-{/*chat pdf */}
+</div>*/} 
+   
+{/*chat pdf 
 <div className='rounded-xl group hover:bg-white p-2 w-10 h-10'>
 <Link href={'https://www.chatpdf.com/'} target={'_blank'} className='flex justify-center'>
 
@@ -145,10 +145,10 @@ setActiveChat(pathName.includes('/chat'))
 </svg>
     </div>
     </Link>
- {/************ */}
+
  </div>
-
-
+*/}
+ {/************ */}
  
 </div>
 
@@ -182,7 +182,7 @@ setActiveChat(pathName.includes('/chat'))
 
 {/*פרומפט אסיסטנט */}
 <div className='rounded-xl group hover:bg-white p-2 w-10 h-10'>
-<Link href={'https://www.imiprompt.com/'} className='flex justify-center'>
+<Link href={'https://poe.com/Midjourney'} className='flex justify-center'>
 
     <div>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" className='text-[#41394B] group-hover:text-[#FF3067]'>
@@ -266,7 +266,7 @@ setActiveChat(pathName.includes('/chat'))
 
  {/*עוזר אישי */}
  <div className='rounded-xl group hover:bg-white'>
-   <Link href={'/chat'} className='flex justify-between pb-2 pt-2 pl-4 pr-4'>
+   <Link href={'https://chat.openai.com/g/g-dcDGVHI7o-experteam-assistant-bot'} target={'_blank'} className='flex justify-between pb-2 pt-2 pl-4 pr-4'>
     <button  className=' '> 
     עוזר אישי
 
@@ -314,9 +314,9 @@ setActiveChat(pathName.includes('/chat'))
 </div>
 
 
-{/* GPT */}
+{/* GPT 
 <div className='rounded-xl group hover:bg-white'>
-<Link href={'https://openai.com/gpt-4'} target={'_blank'} className='flex justify-between  pt-2 pl-4 pr-4'>
+<Link href={'https://chat.openai.com/g/g-dcDGVHI7o-experteam-assistant-bot'} target={'_blank'} className='flex justify-between  pt-2 pl-4 pr-4'>
     <button className=''>Chat GPT
   
     </button>
@@ -334,8 +334,8 @@ setActiveChat(pathName.includes('/chat'))
     </div>
     </Link>
 </div>
-    
-{/*chat pdf */}
+    */}
+{/*chat pdf 
 <div className='rounded-xl group hover:bg-white'>
 <Link href={'https://www.chatpdf.com'} target={'_blank'} className='flex justify-between pb-2 pt-2 pl-4 pr-4'>
     <button className=''>Chat Pdf
@@ -347,8 +347,10 @@ setActiveChat(pathName.includes('/chat'))
 </svg>
     </div>
     </Link>
- {/************ */}
+
  </div>
+*/}
+  {/************ */}
 </div>
 
 <hr className="h-px  bg-[#41394B] border-0 m-4"></hr>
@@ -383,7 +385,7 @@ setActiveChat(pathName.includes('/chat'))
 
 {/*פרומפט אסיסטנט */}
 <div className='rounded-xl group hover:bg-white'>
-<Link href={'https://www.imiprompt.com'} target={'_blank'} className='flex justify-between pb-2 pt-2 pl-4 pr-4'>
+<Link href={'https://poe.com/Midjourney'} target={'_blank'} className='flex justify-between pb-2 pt-2 pl-4 pr-4'>
     <button className=''>עוזר פרומפטים
     </button>
     <div>
